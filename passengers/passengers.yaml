@@ -1,0 +1,287 @@
+openapi: 3.0.3
+info:
+  title: Groupe12 passenger service
+  description: Microservice handling passenger
+  version: 1.0.0
+servers:
+  - url: 'https://localhost:9002'
+    description: Development server
+
+
+paths:
+
+  /passengers/pending/trip/{trip_id}:
+    get:
+      summary: Find the pending users from a trip
+      security:
+        - authentication:
+            - driver
+      parameters:
+        - name: trip_id
+          in: path
+          required: true
+          description: ID of a trip
+          schema:
+            type: integer
+          example: 1
+
+      responses:
+        400:
+          description: Status not in accepted values
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: No trip found with this ID
+        200:
+          description: Get a list of the pending users from the trip
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/users'
+
+  /passengers/accepted/trip/{trip_id}:
+    get:
+      summary: Find the accepted users from a trip
+      security:
+        - authentication:
+            - driver
+      parameters:
+        - name: trip_id
+          in: path
+          required: true
+          description: ID of a trip
+          schema:
+            type: integer
+          example: 1
+
+      responses:
+        400:
+          description: Status not in accepted values
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: No trip found with this ID
+        200:
+          description: Get a list of the accepted users from the trip
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/users'
+
+  /passengers/refused/trip/{trip_id}:
+    get:
+      summary: Find the refused users from a trip
+      security:
+        - authentication:
+            - driver
+      parameters:
+        - name: trip_id
+          in: path
+          required: true
+          description: ID of a trip
+          schema:
+            type: integer
+          example: 1
+
+      responses:
+        400:
+          description: Status not in accepted values
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: No trip found with this ID
+        200:
+          description: Get a list of the refused users from the trip
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/users'
+
+  /passengers/trip/{trip_id}:
+    get:
+      summary: Find the accepted, refused and pending users from a trip
+      security:
+        - authentication:
+            - driver
+      parameters:
+        - name: trip_id
+          in: path
+          required: true
+          description: ID of a trip
+          schema:
+            type: integer
+          example: 1
+
+      responses:
+        400:
+          description: Status not in accepted values
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: No trip found with this ID
+        200:
+          description: Get a list og the accepted, refused and pending users from the trip
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/users'
+
+
+  /passengers/trips/{trip_id}/user/{user_id}:
+    parameters:
+      - name: trip_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 1
+        description: ID of the trip
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 2
+        description: ID of the user
+    post:
+      summary: Add user as passenger to a trip with pending status
+      security:
+        - authentication:
+            - passenger
+      responses:
+        400:
+          description: User is already a passenger, or the ride has no available seating left
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: Trip or user not found
+        201:
+          description: User added as pending passenger
+    get:
+      summary: Get passenger status
+      security:
+        - authentication:
+            - driver
+            - passenger
+      responses:
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: Trip or user not found
+        200:
+          description: Sent passenger status
+          content:
+            'text/plain':
+              schema:
+                type: string
+                enum:
+                  - pending
+                  - accepted
+                  - refused
+    put:
+      summary: Update passenger status
+      security:
+        - authentication:
+            - driver
+      parameters:
+        - name: status
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - accepted
+              - refused
+          description: New status of the passenger
+      responses:
+        400:
+          description: User is not a passenger, or is not in pending status, or status not in accepted value
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: Trip or user not found
+        200:
+          description: Status is updated
+    delete:
+      summary: Remove user from passengers of a trip
+      security:
+        - authentication:
+            - passenger
+      responses:
+        400:
+          description: User is not a passenger
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: Trip or user not found
+        200:
+          description: Used removed from passenger
+
+
+components:
+  schemas:
+
+    passengers:
+      type: object
+      properties:
+        pending:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+        accepted:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+        refused:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+
+    users:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+
+    user:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+      example:
+        id: 1
+        email: gregory.seront@vinci.be
+        firstname: Gregory
+        lastname: Seront
