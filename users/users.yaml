@@ -8,15 +8,7 @@ servers:
     description: Development server
 paths:
 
-  /users/{pseudo}:
-    parameters:
-      - name: pseudo
-        in: path
-        schema:
-          type: string
-        example: PetWard
-        description: Pseudo of the user
-
+  /users:
     post:
       summary: Create a user
       requestBody:
@@ -24,7 +16,7 @@ paths:
         content:
           'application/json':
             schema:
-              $ref: '#/components/schemas/user'
+              $ref: '#/components/schemas/newUser'
       responses:
         400:
           description: Incorrect user
@@ -33,6 +25,15 @@ paths:
         201:
           description: User created
 
+  /users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 1
+        description: ID of the user
     get:
       summary: Read a user
       responses:
@@ -102,4 +103,3 @@ components:
         email: gregory.seront@vinci.be
         firstname: Gregory
         lastname: Seront
-        password: password123
