@@ -1,4 +1,4 @@
-package be.vinci.ipl.passengers;
+package be.vinci.ipl.projet.passengers;
 
 public class PassengersController {
 

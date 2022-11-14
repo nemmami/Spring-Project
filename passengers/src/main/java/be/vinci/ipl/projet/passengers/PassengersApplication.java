@@ -1,4 +1,4 @@
-package be.vinci.ipl.passengers;
+package be.vinci.ipl.projet.passengers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
