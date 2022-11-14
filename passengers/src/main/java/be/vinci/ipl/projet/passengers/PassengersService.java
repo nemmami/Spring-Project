@@ -32,5 +32,15 @@ public class PassengersService {
     return true;
   }
 
+  /**
+   * Deletes a passenger from repository
+   * @param id ID of the passenger
+   * @return True if the passenger was deleted, false if it couldn't be found
+   */
+  public boolean deleteOne(long id) {
+    if (!repository.existsById(id)) return false;
+    repository.deleteById(id);
+    return true;
+  }
 
 }
