@@ -21,6 +21,17 @@ public class PassengersService {
   }
 
   /**
+   * Creates a video in repository
+   * @param video the video to create
+   * @return True if the video could be created, false if it already existed
+   */
+  public boolean createOne(Passenger passenger) {
+    if (repository.existsById(passenger.getId())) return false;
+    repository.save(passenger);
+    return true;
+  }
+
+  /**
    * Reads a passenger in repository
    * @param id ID of the passenger
    * @return The passenger, or null if it couldn't be found
