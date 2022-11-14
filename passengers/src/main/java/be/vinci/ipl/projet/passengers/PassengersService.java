@@ -21,6 +21,16 @@ public class PassengersService {
     return repository.findById(id).orElse(null);
   }
 
+  /**
+   * Updates a passenger in repository
+   * @param passenger New values of the passenger
+   * @return True if the passenger was updated, or null if it couldn't be found
+   */
+  public boolean updateOne(Passenger passenger) {
+    if (!repository.existsById(passenger.getId())) return false;
+    repository.save(passenger);
+    return true;
+  }
 
 
 }
