@@ -13,6 +13,14 @@ public class PassengersService {
   }
 
   /**
+   * Reads all Passengers in repository
+   * @return all passengers
+   */
+  public Iterable<Passenger> readAll() {
+    return repository.findAll();
+  }
+
+  /**
    * Reads a passenger in repository
    * @param id ID of the passenger
    * @return The passenger, or null if it couldn't be found
