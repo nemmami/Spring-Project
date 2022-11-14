@@ -26,6 +26,33 @@ public class TripsService {
         return repository.save(noIdTrip.toTrip());
     }
 
+    /**
+     * Reads a trip in repository
+     * @param id ID of the trip
+     * @return The trip, or null if it couldn't be found
+     */
+    public Trip readOne(int id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    /**
+     * Deletes a trip form repository
+     * @param id ID of the trip
+     * @return True if the trip was deleted, false if it couldn't be found
+     */
+    public boolean deleteOne(int id) {
+        if (!repository.existsById(id)) return false;
+        repository.deleteTripById(id);
+        return true;
+    }
+
+    /**
+     * Deletes all trips of a driver
+     * @param driverId ID of the driver
+     */
+    public void deleteFromDriver(int driverId) {
+        repository.deleteTripByDriverId(driverId);
+    }
 
 
 }
