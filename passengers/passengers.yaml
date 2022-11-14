@@ -13,9 +13,6 @@ paths:
   /passengers/trips/{trip_id}:
     get:
       summary: Find the accepted, refused and pending users from a trip
-      security:
-        - authentication:
-            - driver
       parameters:
         - name: trip_id
           in: path
@@ -62,9 +59,6 @@ paths:
         description: ID of the user
     post:
       summary: Add user as passenger to a trip with pending status
-      security:
-        - authentication:
-            - passenger
       responses:
         400:
           description: User is already a passenger, or the ride has no available seating left
@@ -78,10 +72,6 @@ paths:
           description: User added as pending passenger
     get:
       summary: Get passenger status
-      security:
-        - authentication:
-            - driver
-            - passenger
       responses:
         401:
           description: Missing authentication
@@ -101,9 +91,6 @@ paths:
                   - refused
     put:
       summary: Update passenger status
-      security:
-        - authentication:
-            - driver
       parameters:
         - name: status
           in: query
@@ -127,9 +114,6 @@ paths:
           description: Status is updated
     delete:
       summary: Remove user from passengers of a trip
-      security:
-        - authentication:
-            - passenger
       responses:
         400:
           description: User is not a passenger
