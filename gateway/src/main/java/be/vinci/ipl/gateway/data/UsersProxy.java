@@ -1,0 +1,49 @@
+package be.vinci.ipl.gateway.data;
+
+import be.vinci.ipl.gateway.models.*;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+@Repository
+@FeignClient(name = "users")
+public interface UsersProxy {
+
+  @PostMapping("users")
+  void createUser( @RequestBody User user);
+
+
+  // pas sur si il faut utiliser @RequestBody ou @param
+  @GetMapping("/users")
+  void findUserEmail(@RequestBody String email);
+
+  @PutMapping("/users")
+  void updatePassword(@RequestBody Credentails credentails);
+
+  @GetMapping("/users/{id}")
+  void getUserInfo(@PathVariable int id);
+
+  @PutMapping("/users/{id}")
+  void updateUserInfo(@PathVariable int id, @RequestBody User user );
+
+  @DeleteMapping("/users/{id}")
+  void deleteUser(@PathVariable int id);
+
+  @GetMapping("/users/{id}/driver")
+  void getFutureDriverTrips(@PathVariable int id);
+
+  @GetMapping("/users/{id}/passenger")
+  void getFuturePassengerTrips(@PathVariable int id);
+
+  @GetMapping("/users/{id}/notifications")
+  void getUserNotification(@PathVariable int id);
+
+  @DeleteMapping("/users/{id}/notifications")
+  void deleteAllUserNotification(@PathVariable int id);
+
+}
