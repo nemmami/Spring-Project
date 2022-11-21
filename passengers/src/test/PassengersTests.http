@@ -6,5 +6,8 @@ Content-Type: application/json
   "id": 1,
   "trip_id": 1,
   "user_id": 1,
-  "status": "Pending"
+  "status": "PENDING"
 }
+
+### Read passenger
+GET http://localhost:8080/passenger/1

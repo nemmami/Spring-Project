@@ -32,7 +32,12 @@ public class PassengersController {
     return new ResponseEntity<>(createdPassenger, HttpStatus.CREATED);
   }
 
-
+  @GetMapping("/passenger/{id}")
+  public Passenger readOne(@PathVariable long id) {
+    Passenger review = service.readOne(id);
+    if (review == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    return review;
+  }
 
 
 }
