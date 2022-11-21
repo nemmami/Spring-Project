@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UsersProxy {
 
   @PostMapping("users")
-  void createUser( @RequestBody User user);
+  void createUser( @RequestBody NewUser user);
 
 
   // pas sur si il faut utiliser @RequestBody ou @param
