@@ -21,9 +21,9 @@ public class PassengersService {
   }
 
   /**
-   * Creates a video in repository
-   * @param video the video to create
-   * @return True if the video could be created, false if it already existed
+   * Creates a passenger in repository
+   * @param passenger the passenger to create
+   * @return True if the passenger could be created, false if it already existed
    */
   public boolean createOne(Passenger passenger) {
     if (repository.existsById(passenger.getId())) return false;
