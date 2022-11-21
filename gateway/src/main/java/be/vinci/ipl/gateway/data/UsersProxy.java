@@ -24,7 +24,7 @@ public interface UsersProxy {
   void findUserEmail(@RequestParam("email") String email);
 
   @PutMapping("/users")
-  void updatePassword(@RequestBody Credentails credentails);
+  void updatePassword(@RequestBody Credentials credentials);
 
   @GetMapping("/users/{id}")
   void getUserInfo(@PathVariable int id);

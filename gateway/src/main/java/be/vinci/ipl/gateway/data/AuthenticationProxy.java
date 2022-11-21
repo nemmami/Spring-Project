@@ -1,6 +1,6 @@
 package be.vinci.ipl.gateway.data;
 
-import org.apache.http.auth.Credentials;
+import be.vinci.ipl.gateway.models.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
