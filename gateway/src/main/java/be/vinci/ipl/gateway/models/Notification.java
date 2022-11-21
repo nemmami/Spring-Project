@@ -4,7 +4,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@AllArgsConstructor
 public class Notification {
   private int userId;
   private int tripId;

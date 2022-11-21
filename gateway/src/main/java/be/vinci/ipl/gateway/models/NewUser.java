@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@AllArgsConstructor
 public class NewUser {
   private String email;
   private String firstname;
