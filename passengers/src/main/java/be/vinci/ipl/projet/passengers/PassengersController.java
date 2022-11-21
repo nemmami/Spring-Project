@@ -19,13 +19,13 @@ public class PassengersController {
     this.service = service;
   }
 
-  @PostMapping("/passenger")
-  public ResponseEntity<Passenger> createOne(@RequestBody Passenger passenger) {
-    if (passenger.getId() == 0 || passenger.getTrip_id() == 0 || passenger.getUser_id() == 0
-        || passenger.getStatus().equals("")) {
+  @PostMapping("/trips/{tripId}/users/{userId}")
+  public ResponseEntity<Passenger> createOne(@PathVariable long tripId, @PathVariable long userId) {
+    if (tripId == 0 || userId == 0) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
-    Passenger createdPassenger = service.createOne(passenger);
+
+    Passenger createdPassenger = service.createOne(tripId, userId);
     if (createdPassenger == null) {
       throw new ResponseStatusException(HttpStatus.CONFLICT);
     }

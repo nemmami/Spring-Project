@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PassengersRepository extends CrudRepository<Passenger, Long> {
 
+  boolean existsByTripIdAndUserId(long tripId, long userId);
+
 }

@@ -1,13 +1,6 @@
 ### Create passenger
-POST http://localhost:8080/passenger
-Content-Type: application/json
+POST http://localhost:8080//trips/1/users/2
 
-{
-  "id": 1,
-  "trip_id": 1,
-  "user_id": 1,
-  "status": "PENDING"
-}
 
 ### Read passenger
 GET http://localhost:8080/passenger/1

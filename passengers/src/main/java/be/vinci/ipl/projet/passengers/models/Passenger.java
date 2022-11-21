@@ -23,9 +23,13 @@ public class Passenger {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  private long trip_id;
-  private long user_id;
+  private long tripId;
+  private long userId;
   @Enumerated(EnumType.STRING)
   private PassengerStatus status;
+
+  public static Passenger defPassenger(long tripId, long userId) {
+    return new Passenger(0, tripId, userId, PassengerStatus.PENDING);
+  }
 
 }

@@ -22,13 +22,14 @@ public class PassengersService {
 
   /**
    * Creates a passenger in repository
-   * @param passenger the passenger to create
+   * @param tripId the id trip to create the passenger
+   * @param userId the id user to create the passenger
    * @return The passenger created, or null if it already existed
    */
-  public Passenger createOne(Passenger passenger) {
-    if (repository.existsById(passenger.getId())) return null;
+  public Passenger createOne(long tripId, long userId) {
+    if (repository.existsByTripIdAndUserId(tripId, userId)) return null;
 
-    return repository.save(passenger);
+    return repository.save(Passenger.defPassenger(tripId, userId));
   }
 
   /**
