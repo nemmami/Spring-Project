@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Repository
 @FeignClient(name = "users")
@@ -20,7 +21,7 @@ public interface UsersProxy {
 
   // pas sur si il faut utiliser @RequestBody ou @param
   @GetMapping("/users")
-  void findUserEmail(@RequestBody String email);
+  void findUserEmail(@RequestParam("email") String email);
 
   @PutMapping("/users")
   void updatePassword(@RequestBody Credentails credentails);
