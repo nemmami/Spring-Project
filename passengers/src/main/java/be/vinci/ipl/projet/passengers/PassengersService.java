@@ -23,12 +23,12 @@ public class PassengersService {
   /**
    * Creates a passenger in repository
    * @param passenger the passenger to create
-   * @return True if the passenger could be created, false if it already existed
+   * @return The passenger created, or null if it already existed
    */
-  public boolean createOne(Passenger passenger) {
-    if (repository.existsById(passenger.getId())) return false;
-    repository.save(passenger);
-    return true;
+  public Passenger createOne(Passenger passenger) {
+    if (repository.existsById(passenger.getId())) return null;
+
+    return repository.save(passenger);
   }
 
   /**
