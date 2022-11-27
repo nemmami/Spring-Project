@@ -53,6 +53,17 @@ public class PassengersController {
     return service.readFromTrip(tripId);
   }
 
+  @GetMapping("/trips/{tripId}")
+  public Iterable<Passenger> readFromTrips(@PathVariable long tripId) {
+    return service.readFromTrips(tripId);
+  }
+
+  @DeleteMapping("/trips/{tripId}")
+  public void deleteFromVideo(@PathVariable long tripId) {
+    service.deleteFromTrips(tripId);
+  }
+
+
 
 
 }
