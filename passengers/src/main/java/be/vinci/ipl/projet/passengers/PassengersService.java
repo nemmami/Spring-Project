@@ -118,4 +118,23 @@ public class PassengersService {
     return listUsers;
   }
 
+  /**
+   * Reads all reviews of a video
+   * @param tripId Hash of the video
+   * @return The list of reviews of this video
+   */
+  public Iterable<Passenger> readFromTrips(long tripId) {
+    return repository.findByTripId(tripId);
+  }
+
+  /**
+   * Deletes all reviews of a video
+   * @param tripId Hash of the video
+   */
+  public void deleteFromTrips(long tripId) {
+    repository.deleteByTripId(tripId);
+  }
+
+
+
 }

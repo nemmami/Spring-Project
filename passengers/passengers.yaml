@@ -38,7 +38,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/user'
+                  $ref: '#/components/schemas/passengers'
 
 
   /trips/{trip_id}/users/{user_id}:
@@ -127,6 +127,62 @@ paths:
           description: User removed from passenger
 
 
+
+  /trips/{trip_id}:
+    parameters:
+      - name: trips_id
+        in: path
+        required: true
+        description: ID of the trip
+        schema:
+          type: integer
+
+    get:
+      summary: Find passengers from a trip
+      responses:
+        200:
+          description: Passengers from the trip
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/passenger'
+
+    delete:
+      summary: Delete passengers from a trip
+      responses:
+        200:
+          description: Passengers deleted
+
+  /users/user_id:
+    parameters:
+      - name: user_id
+        in: path
+        required: true
+        description: ID of the user
+        schema:
+          type: integer
+
+    get:
+      summary: Find passengers of a user
+      responses:
+        200:
+          description: Passengers of the user
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/passenger'
+
+    delete:
+      summary: Delete passengers of a user
+      responses:
+        200:
+          description: Passengers deleted
+
+
 components:
   schemas:
 
@@ -162,3 +218,20 @@ components:
         email: gregory.seront@vinci.be
         firstname: Gregory
         lastname: Seront
+
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+            trip_id:
+              type: integer
+            user_id:
+              type: integer
+            status:
+              type: PassengerStatus
+          example:
+            id: 1
+            trip_id: 1
+            user_id: 1
+            lastname: PENDING
