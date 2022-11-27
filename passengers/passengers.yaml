@@ -219,7 +219,7 @@ components:
         firstname: Gregory
         lastname: Seront
 
-        user:
+        passenger:
           type: object
           properties:
             id:
