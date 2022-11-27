@@ -153,7 +153,7 @@ public class PassengersService {
    * @return The list of passengers of this user
    */
   public Iterable<Passenger> readFromUsers(long userId) {
-    return repository.findByTripId(userId);
+    return repository.findByUserId(userId);
   }
 
   /**
@@ -162,7 +162,7 @@ public class PassengersService {
    * @param userId the id user of the passenger
    */
   public void deleteFromUsers(long userId) {
-    repository.deleteByTripId(userId);
+    repository.deleteByUserId(userId);
   }
 
 

@@ -19,9 +19,11 @@ public interface PassengersRepository extends CrudRepository<Passenger, Long> {
 
   Iterable<Passenger> findByTripId(long tripId);
 
-  @Transactional
-  void deleteByTripId(Long tripId);
+  Iterable<Passenger> findByUserId(long userId);
 
   @Transactional
-  void deleteByUserId(Long userIduserId);
+  void deleteByTripId(long tripId);
+
+  @Transactional
+  void deleteByUserId(long userId);
 }

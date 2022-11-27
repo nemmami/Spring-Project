@@ -27,8 +27,9 @@ public class PassengersController {
 
   @GetMapping("/passengers")
   public Iterable<Passenger> readAll() {
-   return service.readAll();
+    return service.readAll();
   }
+
   @PostMapping("/trips/{tripId}/users/{userId}")
   public ResponseEntity<Passenger> createOne(@PathVariable long tripId, @PathVariable long userId) {
     if (tripId == 0 || userId == 0) {
@@ -45,20 +46,27 @@ public class PassengersController {
   @GetMapping("/trips/{tripId}/users/{userId}")
   public PassengerStatus readOne(@PathVariable long tripId, @PathVariable long userId) {
     Passenger review = service.readOne(tripId, userId);
-    if (review == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    if (review == null) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
     return review.getStatus();
   }
 
   @PutMapping("/trips/{tripId}/users/{userId}")
-  public void updateOne(@PathVariable long tripId, @PathVariable long userId, @RequestParam(name = "status") String status) {
+  public void updateOne(@PathVariable long tripId, @PathVariable long userId,
+      @RequestParam(name = "status") String status) {
     boolean found = service.updateOne(tripId, userId, status);
-    if (!found) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    if (!found) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
   }
 
   @DeleteMapping("/trips/{tripId}/users/{userId}")
   public void deleteOne(@PathVariable long tripId, @PathVariable long userId) {
     boolean found = service.deleteOne(tripId, userId);
-    if (!found) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    if (!found) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
   }
 
   @GetMapping("/passengers/trips/{tripId}")
@@ -85,8 +93,6 @@ public class PassengersController {
   public void deleteFromUsers(@PathVariable long userId) {
     service.deleteFromUsers(userId);
   }
-
-
 
 
 }
