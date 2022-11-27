@@ -34,11 +34,12 @@ public class PassengersService {
 
   /**
    * Reads a passenger in repository
-   * @param id ID of the passenger
+   * @param tripId the id trip
+   * @param userId the id user
    * @return The passenger, or null if it couldn't be found
    */
-  public Passenger readOne(long id) {
-    return repository.findById(id).orElse(null);
+  public Passenger readOne(long tripId, long userId) {
+    return repository.findByTripIdAndUserId(tripId, userId).orElse(null);
   }
 
   /**

@@ -1,6 +1,7 @@
 package be.vinci.ipl.projet.passengers;
 
 import be.vinci.ipl.projet.passengers.models.Passenger;
+import be.vinci.ipl.projet.passengers.models.PassengerStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,11 +33,11 @@ public class PassengersController {
     return new ResponseEntity<>(createdPassenger, HttpStatus.CREATED);
   }
 
-  @GetMapping("/passenger/{id}")
-  public Passenger readOne(@PathVariable long id) {
-    Passenger review = service.readOne(id);
+  @GetMapping("/trips/{tripId}/users/{userId}")
+  public PassengerStatus readOne(@PathVariable long tripId, @PathVariable long userId) {
+    Passenger review = service.readOne(tripId, userId);
     if (review == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-    return review;
+    return review.getStatus();
   }
 
 
