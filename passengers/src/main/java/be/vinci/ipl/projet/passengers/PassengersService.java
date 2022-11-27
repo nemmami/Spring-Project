@@ -135,6 +135,23 @@ public class PassengersService {
     repository.deleteByTripId(tripId);
   }
 
+  /**
+   * Reads all reviews of a video
+   * @param userId Hash of the video
+   * @return The list of reviews of this video
+   */
+  public Iterable<Passenger> readFromUsers(long userId) {
+    return repository.findByTripId(userId);
+  }
+
+  /**
+   * Deletes all reviews of a video
+   * @param userId Hash of the video
+   */
+  public void deleteFromUsers(long userId) {
+    repository.deleteByTripId(userId);
+  }
+
 
 
 }

@@ -59,8 +59,18 @@ public class PassengersController {
   }
 
   @DeleteMapping("/trips/{tripId}")
-  public void deleteFromVideo(@PathVariable long tripId) {
+  public void deleteFromTrips(@PathVariable long tripId) {
     service.deleteFromTrips(tripId);
+  }
+
+  @GetMapping("/users/{userId}")
+  public Iterable<Passenger> readFromUsers(@PathVariable long userId) {
+    return service.readFromUsers(userId);
+  }
+
+  @DeleteMapping("/users/{userId}")
+  public void deleteFromUsers(@PathVariable long userId) {
+    service.deleteFromUsers(userId);
   }
 
 
