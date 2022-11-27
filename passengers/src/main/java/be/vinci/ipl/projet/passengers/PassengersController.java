@@ -4,6 +4,7 @@ import be.vinci.ipl.projet.passengers.models.Passenger;
 import be.vinci.ipl.projet.passengers.models.PassengerStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,12 @@ public class PassengersController {
     Passenger review = service.readOne(tripId, userId);
     if (review == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     return review.getStatus();
+  }
+
+  @DeleteMapping("/trips/{tripId}/users/{userId}")
+  public void deleteOne(@PathVariable long tripId, @PathVariable long userId) {
+    boolean found = service.deleteOne(tripId, userId);
+    if (!found) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
   }
 
 

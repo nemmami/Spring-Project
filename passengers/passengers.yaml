@@ -124,7 +124,7 @@ paths:
         404:
           description: Trip or user not found
         200:
-          description: Used removed from passenger
+          description: User removed from passenger
 
 
 components:

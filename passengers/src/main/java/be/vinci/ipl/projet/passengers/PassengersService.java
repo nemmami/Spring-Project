@@ -34,8 +34,8 @@ public class PassengersService {
 
   /**
    * Reads a passenger in repository
-   * @param tripId the id trip
-   * @param userId the id user
+   * @param tripId the id trip of the passenger
+   * @param userId the id user of the passenger
    * @return The passenger, or null if it couldn't be found
    */
   public Passenger readOne(long tripId, long userId) {
@@ -55,12 +55,13 @@ public class PassengersService {
 
   /**
    * Deletes a passenger from repository
-   * @param id ID of the passenger
+   * @param tripId the id trip of the passenger
+   * @param userId the id user of the passenger
    * @return True if the passenger was deleted, false if it couldn't be found
    */
-  public boolean deleteOne(long id) {
-    if (!repository.existsById(id)) return false;
-    repository.deleteById(id);
+  public boolean deleteOne(long tripId, long userId) {
+    if (!repository.existsByTripIdAndUserId(tripId, userId)) return false;
+    repository.deleteByTripIdAndUserId(tripId, userId);
     return true;
   }
 
