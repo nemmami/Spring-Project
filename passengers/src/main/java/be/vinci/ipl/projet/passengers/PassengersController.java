@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -40,6 +42,12 @@ public class PassengersController {
     Passenger review = service.readOne(tripId, userId);
     if (review == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     return review.getStatus();
+  }
+
+  @PutMapping("/trips/{tripId}/users/{userId}")
+  public void updateOne(@PathVariable long tripId, @PathVariable long userId, @RequestParam(name = "status") String status) {
+    boolean found = service.updateOne(tripId, userId, status);
+    if (!found) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
   }
 
   @DeleteMapping("/trips/{tripId}/users/{userId}")

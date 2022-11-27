@@ -58,14 +58,21 @@ public class PassengersService {
   /**
    * Updates a passenger in repository
    *
-   * @param passenger New values of the passenger
+   * @param tripId the id trip of the passenger
+   * @param userId the id user of the passenger
+   * @param status the status that the passenger will have
    * @return True if the passenger was updated, or null if it couldn't be found
    */
-  public boolean updateOne(Passenger passenger) {
-    if (!repository.existsById(passenger.getId())) {
+  public boolean updateOne(long tripId, long userId, String status) {
+    if (!repository.existsByTripIdAndUserId(tripId, userId)) {
       return false;
     }
-    repository.save(passenger);
+    Passenger p = readOne(tripId, userId);
+    if(status.equals("accepted")){
+     p.setStatus(PassengerStatus.ACCEPTED);
+    }else p.setStatus(PassengerStatus.REFUSED);
+
+    repository.save(p);
     return true;
   }
 
