@@ -32,7 +32,7 @@ paths:
         404:
           description: No trip found with this ID
         200:
-          description: Get a list og the accepted, refused and pending users from the trip
+          description: Get a list of the accepted, refused and pending users from the trip
           content:
             'application/json':
               schema:

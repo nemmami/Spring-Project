@@ -2,6 +2,7 @@ package be.vinci.ipl.projet.passengers;
 
 import be.vinci.ipl.projet.passengers.models.Passenger;
 import be.vinci.ipl.projet.passengers.models.PassengerStatus;
+import be.vinci.ipl.projet.passengers.models.PassengerUsers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,6 +47,12 @@ public class PassengersController {
     boolean found = service.deleteOne(tripId, userId);
     if (!found) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
   }
+
+  @GetMapping("/passengers/trips/{tripId}")
+  public PassengerUsers readFromTrip(@PathVariable long tripId) {
+    return service.readFromTrip(tripId);
+  }
+
 
 
 }

@@ -1,8 +1,9 @@
-package be.vinci.ipl.projet.passengers;
+package be.vinci.ipl.projet.passengers.data;
 
 import be.vinci.ipl.projet.passengers.models.Passenger;
 import java.util.Optional;
 import javax.transaction.Transactional;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,7 @@ public interface PassengersRepository extends CrudRepository<Passenger, Long> {
 
   @Transactional
   void deleteByTripIdAndUserId(long tripId, long userId);
+
+  Iterable<Passenger> findByTripId(long tripId);
+
 }
