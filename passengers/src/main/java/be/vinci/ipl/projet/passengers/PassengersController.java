@@ -24,6 +24,11 @@ public class PassengersController {
     this.service = service;
   }
 
+
+  @GetMapping("/passengers")
+  public Iterable<Passenger> readAll() {
+   return service.readAll();
+  }
   @PostMapping("/trips/{tripId}/users/{userId}")
   public ResponseEntity<Passenger> createOne(@PathVariable long tripId, @PathVariable long userId) {
     if (tripId == 0 || userId == 0) {
