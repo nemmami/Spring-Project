@@ -61,16 +61,18 @@ public class PassengersService {
    * @param tripId the id trip of the passenger
    * @param userId the id user of the passenger
    * @param status the status that the passenger will have
-   * @return True if the passenger was updated, or null if it couldn't be found
+   * @return True if the passenger was updated, or false if it couldn't be found
    */
   public boolean updateOne(long tripId, long userId, String status) {
     if (!repository.existsByTripIdAndUserId(tripId, userId)) {
       return false;
     }
     Passenger p = readOne(tripId, userId);
-    if(status.equals("accepted")){
-     p.setStatus(PassengerStatus.ACCEPTED);
-    }else p.setStatus(PassengerStatus.REFUSED);
+    if (status.equals("accepted")) {
+      p.setStatus(PassengerStatus.ACCEPTED);
+    } else {
+      p.setStatus(PassengerStatus.REFUSED);
+    }
 
     repository.save(p);
     return true;
@@ -92,7 +94,7 @@ public class PassengersService {
   }
 
   /**
-   * Reads all passengers from a trip
+   * Reads all passengers from a trip, Find the accepted, refused and pending users from a trip
    *
    * @param tripId Pseudo of the user
    * @return The list of reviews from this user
@@ -126,39 +128,42 @@ public class PassengersService {
   }
 
   /**
-   * Reads all reviews of a video
-   * @param tripId Hash of the video
-   * @return The list of reviews of this video
+   * Reads all passengers of a trip
+   *
+   * @param tripId the id trip of the passenger
+   * @return The list of passengers of this trip
    */
   public Iterable<Passenger> readFromTrips(long tripId) {
     return repository.findByTripId(tripId);
   }
 
   /**
-   * Deletes all reviews of a video
-   * @param tripId Hash of the video
+   * Deletes all passengers of a trip
+   *
+   * @param tripId the id trip of the passenger
    */
   public void deleteFromTrips(long tripId) {
     repository.deleteByTripId(tripId);
   }
 
   /**
-   * Reads all reviews of a video
-   * @param userId Hash of the video
-   * @return The list of reviews of this video
+   * Reads all passengers of a user
+   *
+   * @param userId Hathe id user of the passenger
+   * @return The list of passengers of this user
    */
   public Iterable<Passenger> readFromUsers(long userId) {
     return repository.findByTripId(userId);
   }
 
   /**
-   * Deletes all reviews of a video
-   * @param userId Hash of the video
+   * Deletes all passengers of a user
+   *
+   * @param userId the id user of the passenger
    */
   public void deleteFromUsers(long userId) {
     repository.deleteByTripId(userId);
   }
-
 
 
 }
