@@ -79,10 +79,10 @@ public class GatewayService {
     tripsProxy.createTrip(newTrip);
   }
 
-  public void getListTrips(String dateDeparture){
-    //tripsProxy.getListTrips(dateDeparture);
-    //TODO
+  public void getListTrips(String dateDeparture, String originLon, String destinationLat, String destinationLon){
+    tripsProxy.getListTrips(dateDeparture,originLon,destinationLat,destinationLon);
   }
+
   public Trip getTripInfo(int id){
    return tripsProxy.getTripInfo(id);
   }
