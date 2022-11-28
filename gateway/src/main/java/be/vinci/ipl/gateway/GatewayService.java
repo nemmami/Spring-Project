@@ -4,6 +4,7 @@ package be.vinci.ipl.gateway;
 
 import be.vinci.ipl.gateway.data.*;
 import be.vinci.ipl.gateway.models.*;
+import com.google.common.reflect.ImmutableTypeToInstanceMap;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,8 +36,8 @@ public class GatewayService {
     usersProxy.createUser( newUser);
   }
 
-  public void findUserByMail(String mail){
-    usersProxy.findUserEmail(mail);
+  public User findUserByMail(String mail){
+     return usersProxy.findUserEmail(mail);
   }
 
   public void updatePassword(Credentials credentials){
@@ -44,8 +45,8 @@ public class GatewayService {
     authenticationProxy.updateCredentials(credentials.getEmail(), credentials);
   }
 
-  public void getUserInfo(int id){
-    usersProxy.getUserInfo(id);
+  public User getUserInfo(int id){
+   return usersProxy.getUserInfo(id);
   }
 
   public void upateUserInfo(int id, User user){
@@ -58,16 +59,16 @@ public class GatewayService {
     //tripsProxy.deleteTrip(xx);
   }
 
-  public void getFutureDriverTrips(int id){
-    usersProxy.getFutureDriverTrips(id);
+  public Iterable<Trip> getFutureDriverTrips(int id){
+   return usersProxy.getFutureDriverTrips(id);
   }
 
-  public void getFuturePassengerTrips(int id){
-    usersProxy.getFuturePassengerTrips(id);
+  public Iterable<Trip> getFuturePassengerTrips(int id){
+    return  usersProxy.getFuturePassengerTrips(id);
   }
 
-  public void getUserNotification(int id){
-    usersProxy.getUserNotification(id);
+  public Iterable<Notification> getUserNotification(int id){
+   return usersProxy.getUserNotification(id);
   }
 
   public void deleteAllUserNotification(int id){
@@ -79,9 +80,37 @@ public class GatewayService {
   }
 
   public void getListTrips(String dateDeparture){
-    tripsProxy.getListTrips(dateDeparture);
+    //tripsProxy.getListTrips(dateDeparture);
     //TODO
   }
+  public Trip getTripInfo(int id){
+   return tripsProxy.getTripInfo(id);
+  }
+
+  public void deletTrip(int id){
+    tripsProxy.deleteTrip(id);
+  }
+
+  public Iterable<Passengers> getPassangerList(int id){
+    return tripsProxy.getPassengerList(id);
+  }
+
+  public void addPasengerToTrip(int trip_id, int user_id){
+    tripsProxy.addPasengerToTrip(trip_id, user_id);
+  }
+
+  public String getPassengerStatus(int trip_id, int user_id){
+    return tripsProxy.getPassengerStatus(trip_id, user_id);
+  }
+
+  public void updatePassengerStatus(int trip_id, int user_id, String status){
+    tripsProxy.updatePassengerStatus(trip_id, user_id, status);
+  }
+
+  public void removePassengerFromTrip(int trip_id, int user_id){
+    tripsProxy.removePassengerFromTrip(trip_id, user_id);
+  }
+
 
 
 }
