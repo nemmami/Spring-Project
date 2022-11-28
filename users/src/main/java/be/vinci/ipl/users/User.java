@@ -1,4 +1,4 @@
-package be.vinci.ipl.catflix.usersgit;
+package be.vinci.ipl.users;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
