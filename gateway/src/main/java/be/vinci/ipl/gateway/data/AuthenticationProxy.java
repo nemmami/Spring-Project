@@ -21,6 +21,9 @@ public interface AuthenticationProxy {
   @PutMapping("/authentication/{pseudo}")
   void updateCredentials(@PathVariable String email, @RequestBody Credentials credentials);
 
+  @DeleteMapping("/authentication/{pseudo}")
+  void deletCredentials(@PathVariable String email);
+
 
 
 }
