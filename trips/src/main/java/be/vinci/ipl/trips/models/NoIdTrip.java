@@ -2,19 +2,18 @@ package be.vinci.ipl.trips.models;
 
 import lombok.*;
 
-import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class NoIdTrip {
-    @Embedded
     private Position origin;
-    @Embedded
+
     private Position destination;
-    private Date departureDate;
+    private LocalDate departureDate;
     private int driverId;
     private int availableSeatigng;
 

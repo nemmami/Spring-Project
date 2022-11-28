@@ -1,4 +1,4 @@
-package be.vinci.ipl.trips.models;
+package be.vinci.ipl.calculated_distance.models;
 
 import lombok.*;
 

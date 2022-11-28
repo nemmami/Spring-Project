@@ -1,10 +1,9 @@
-package be.vinci.ipl.trips.models;
+package be.vinci.ipl.calculated_distance.models;
 
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -19,8 +18,8 @@ public class Trip {
 
     @Embedded
     @AttributeOverrides ({
-        @AttributeOverride(name = "latitude", column = @Column(name = "origin_latitude")),
-        @AttributeOverride(name = "longitude", column = @Column(name = "origin_logitude"))
+            @AttributeOverride(name = "latitude", column = @Column(name = "origin_latitude")),
+            @AttributeOverride(name = "longitude", column = @Column(name = "origin_logitude"))
     })
     private Position origin;
 

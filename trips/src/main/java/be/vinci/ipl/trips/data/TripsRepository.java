@@ -1,8 +1,11 @@
 package be.vinci.ipl.trips.data;
 
 import be.vinci.ipl.trips.models.Trip;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import javax.persistence.Tuple;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -18,4 +21,5 @@ public interface TripsRepository extends CrudRepository<Trip, Integer> {
     @Transactional
     void deleteTripByDriverId(int driverId);
 
+    Iterable<Trip> findAll(Sort id);
 }

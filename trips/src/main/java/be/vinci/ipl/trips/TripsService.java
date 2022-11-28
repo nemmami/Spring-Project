@@ -5,7 +5,13 @@ import be.vinci.ipl.trips.data.UsersProxy;
 import be.vinci.ipl.trips.models.NoIdTrip;
 import be.vinci.ipl.trips.models.Trip;
 import be.vinci.ipl.trips.models.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.Tuple;
+import java.util.stream.StreamSupport;
+
+import static java.lang.Math.abs;
 
 @Service
 public class TripsService {
@@ -54,5 +60,37 @@ public class TripsService {
         repository.deleteTripByDriverId(driverId);
     }
 
+    /**
+     * Reads all trips of a driver
+     * @param driverId ID of the driver
+     * @return the list of his trips
+     */
+    public Iterable<Trip> readFromDiver(int driverId) {
+        return repository.findByDriverId(driverId);
+    }
 
+    /**
+     * Finds 20 last trips
+     * @return the list of trips
+     */
+    public Iterable<Trip> find20First() {
+        //return repository.findAll();
+        Iterable<Trip> firsts = repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        return StreamSupport.stream(firsts.spliterator(), false)
+                .filter(first ->
+                    first.getAvailableSeatigng() > 0
+                )
+                .limit(20)
+                .toList();
+    }
+
+    /* test
+    public double getDistance(int id) {
+        Trip trip = readOne(id);
+        if(trip == null)
+            return -1;
+        return (abs(trip.getOrigin().getLatitude() - trip.getOrigin().getLongitude())
+                + abs(trip.getDestination().getLatitude() - trip.getDestination().getLongitude()));
+    }
+    */
 }
