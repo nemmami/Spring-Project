@@ -7,10 +7,9 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
-public class PassangerTrips {
-  private ArrayList<Trip> pending;
+public class Passengers {
+  private ArrayList<User> pending;
   private ArrayList<User> accepted;
   private ArrayList<User> refused;
 
