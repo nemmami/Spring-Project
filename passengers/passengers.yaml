@@ -10,6 +10,22 @@ servers:
 
 paths:
 
+  /passengers:
+
+    get:
+      summary: Read all passengers
+      responses:
+        200:
+          description: Returned list of passengers
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/passenger'
+
+
+
   /passengers/trips/{trip_id}:
     get:
       summary: Find the accepted, refused and pending users from a trip
@@ -41,10 +57,14 @@ paths:
                   $ref: '#/components/schemas/passengers'
 
     delete:
+      summary: Delete passengers from a trip
+      responses:
+        200:
+          description: Passengers deleted
 
 
 
-  /trips/{trip_id}/users/{user_id}:
+  /passengers/trips/{trip_id}/users/{user_id}:
     parameters:
       - name: trip_id
         in: path
@@ -131,34 +151,7 @@ paths:
 
 
 
-  /trips/{trip_id}:
-    parameters:
-      - name: trips_id
-        in: path
-        required: true
-        description: ID of the trip
-        schema:
-          type: integer
-
-    get:
-      summary: Find passengers from a trip
-      responses:
-        200:
-          description: Passengers from the trip
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/passenger'
-
-    delete:
-      summary: Delete passengers from a trip
-      responses:
-        200:
-          description: Passengers deleted
-
-  /users/user_id:
+  /passengers/users/user_id:
     parameters:
       - name: user_id
         in: path
@@ -166,18 +159,6 @@ paths:
         description: ID of the user
         schema:
           type: integer
-
-    get:
-      summary: Find passengers of a user
-      responses:
-        200:
-          description: Passengers of the user
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/passenger'
 
     delete:
       summary: Delete passengers of a user

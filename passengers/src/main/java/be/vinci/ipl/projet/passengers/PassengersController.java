@@ -30,7 +30,7 @@ public class PassengersController {
     return service.readAll();
   }
 
-  @PostMapping("/trips/{tripId}/users/{userId}")
+  @PostMapping("/passengers/trips/{tripId}/users/{userId}")
   public ResponseEntity<Passenger> createOne(@PathVariable long tripId, @PathVariable long userId) {
     if (tripId == 0 || userId == 0) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -43,7 +43,7 @@ public class PassengersController {
     return new ResponseEntity<>(createdPassenger, HttpStatus.CREATED);
   }
 
-  @GetMapping("/trips/{tripId}/users/{userId}")
+  @GetMapping("/passengers/trips/{tripId}/users/{userId}")
   public PassengerStatus readOne(@PathVariable long tripId, @PathVariable long userId) {
     Passenger review = service.readOne(tripId, userId);
     if (review == null) {
@@ -52,16 +52,19 @@ public class PassengersController {
     return review.getStatus();
   }
 
-  @PutMapping("/trips/{tripId}/users/{userId}")
+  @PutMapping("/passengers/trips/{tripId}/users/{userId}")
   public void updateOne(@PathVariable long tripId, @PathVariable long userId,
       @RequestParam(name = "status") String status) {
+    if (!status.equals("accepted") && !status.equals("refused")) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    }
     boolean found = service.updateOne(tripId, userId, status);
     if (!found) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
   }
 
-  @DeleteMapping("/trips/{tripId}/users/{userId}")
+  @DeleteMapping("/passengers/trips/{tripId}/users/{userId}")
   public void deleteOne(@PathVariable long tripId, @PathVariable long userId) {
     boolean found = service.deleteOne(tripId, userId);
     if (!found) {
@@ -74,22 +77,17 @@ public class PassengersController {
     return service.readFromTrip(tripId);
   }
 
-  @GetMapping("/trips/{tripId}")
-  public Iterable<Passenger> readFromTrips(@PathVariable long tripId) {
-    return service.readFromTrips(tripId);
-  }
-
-  @DeleteMapping("/trips/{tripId}")
+  @DeleteMapping("/passengers/trips/{tripId}")
   public void deleteFromTrips(@PathVariable long tripId) {
     service.deleteFromTrips(tripId);
   }
 
-  @GetMapping("/users/{userId}")
+  @GetMapping("/passengers/users/{userId}")
   public Iterable<Passenger> readFromUsers(@PathVariable long userId) {
     return service.readFromUsers(userId);
   }
 
-  @DeleteMapping("/users/{userId}")
+  @DeleteMapping("/passengers/users/{userId}")
   public void deleteFromUsers(@PathVariable long userId) {
     service.deleteFromUsers(userId);
   }
