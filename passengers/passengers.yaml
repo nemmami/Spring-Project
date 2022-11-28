@@ -40,6 +40,9 @@ paths:
                 items:
                   $ref: '#/components/schemas/passengers'
 
+    delete:
+
+
 
   /trips/{trip_id}/users/{user_id}:
     parameters:
