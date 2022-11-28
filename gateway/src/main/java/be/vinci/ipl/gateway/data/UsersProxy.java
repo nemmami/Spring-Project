@@ -1,6 +1,7 @@
 package be.vinci.ipl.gateway.data;
 
 import be.vinci.ipl.gateway.models.*;
+import java.util.ArrayList;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,13 +22,13 @@ public interface UsersProxy {
 
   // pas sur si il faut utiliser @RequestBody ou @param
   @GetMapping("/users")
-  void findUserEmail(@RequestParam("email") String email);
+  User findUserEmail(@RequestParam("email") String email);
 
   @PutMapping("/users")
   void updatePassword(@RequestBody Credentials credentials);
 
   @GetMapping("/users/{id}")
-  void getUserInfo(@PathVariable int id);
+  User getUserInfo(@PathVariable int id);
 
   @PutMapping("/users/{id}")
   void updateUserInfo(@PathVariable int id, @RequestBody User user );
@@ -36,13 +37,13 @@ public interface UsersProxy {
   void deleteUser(@PathVariable int id);
 
   @GetMapping("/users/{id}/driver")
-  void getFutureDriverTrips(@PathVariable int id);
+  ArrayList<Trip> getFutureDriverTrips(@PathVariable int id);
 
   @GetMapping("/users/{id}/passenger")
-  void getFuturePassengerTrips(@PathVariable int id);
+  ArrayList<Trip> getFuturePassengerTrips(@PathVariable int id);
 
   @GetMapping("/users/{id}/notifications")
-  void getUserNotification(@PathVariable int id);
+  ArrayList<Notification> getUserNotification(@PathVariable int id);
 
   @DeleteMapping("/users/{id}/notifications")
   void deleteAllUserNotification(@PathVariable int id);
