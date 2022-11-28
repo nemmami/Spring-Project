@@ -1,11 +1,9 @@
 package be.vinci.ipl.gateway;
 
 
-import be.vinci.ipl.gateway.data.AuthenticationProxy;
-import be.vinci.ipl.gateway.data.TripsProxy;
-import be.vinci.ipl.gateway.data.UsersProxy;
-import be.vinci.ipl.gateway.models.Credentials;
-import be.vinci.ipl.gateway.models.NewUser;
+
+import be.vinci.ipl.gateway.data.*;
+import be.vinci.ipl.gateway.models.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +18,7 @@ public class GatewayService {
     this.authenticationProxy = authenticationProxy;
     this.tripsProxy = tripsProxy;
     this.usersProxy = usersProxy;
+
   }
 
   public String connect(Credentials credentials){
@@ -40,9 +39,49 @@ public class GatewayService {
     usersProxy.findUserEmail(mail);
   }
 
-  public void UpdatePassword(Credentials credentials){
+  public void updatePassword(Credentials credentials){
     usersProxy.updatePassword(credentials);
     authenticationProxy.updateCredentials(credentials.getEmail(), credentials);
   }
+
+  public void getUserInfo(int id){
+    usersProxy.getUserInfo(id);
+  }
+
+  public void upateUserInfo(int id, User user){
+    usersProxy.updateUserInfo(id, user);
+  }
+
+  public void deleteUser(User user){
+    usersProxy.deleteUser(user.getId());
+    authenticationProxy.deletCredentials(user.getEmail());
+    //tripsProxy.deleteTrip(xx);
+  }
+
+  public void getFutureDriverTrips(int id){
+    usersProxy.getFutureDriverTrips(id);
+  }
+
+  public void getFuturePassengerTrips(int id){
+    usersProxy.getFuturePassengerTrips(id);
+  }
+
+  public void getUserNotification(int id){
+    usersProxy.getUserNotification(id);
+  }
+
+  public void deleteAllUserNotification(int id){
+    usersProxy.deleteAllUserNotification(id);
+  }
+
+  public void createTrip(NewTrip newTrip){
+    tripsProxy.createTrip(newTrip);
+  }
+
+  public void getListTrips(String dateDeparture){
+    tripsProxy.getListTrips(dateDeparture);
+    //TODO
+  }
+
 
 }
