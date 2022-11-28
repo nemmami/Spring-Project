@@ -1,7 +1,6 @@
 package be.vinci.ipl.gateway.data;
 
 import be.vinci.ipl.gateway.models.*;
-import java.util.ArrayList;
 import javax.ws.rs.QueryParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
@@ -21,8 +20,6 @@ public interface TripsProxy {
   void createTrip(@RequestBody NewTrip newTrip);
 
 
-//pas sur de la façon dont j'ai fait tt ça tout param sont optionels ici
-  // avec des Querry apram
 @GetMapping("/trips")
 Iterable<Trip> getListTrips(@QueryParam("departure_date") String departureDate,
     @QueryParam("originLon") String originLon, @QueryParam("destinationLat") String destinationLat,

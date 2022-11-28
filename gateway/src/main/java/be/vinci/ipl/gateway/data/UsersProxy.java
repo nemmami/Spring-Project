@@ -2,6 +2,7 @@ package be.vinci.ipl.gateway.data;
 
 import be.vinci.ipl.gateway.models.*;
 import java.util.ArrayList;
+import javax.ws.rs.QueryParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,9 +21,8 @@ public interface UsersProxy {
   void createUser( @RequestBody NewUser user);
 
 
-  // pas sur si il faut utiliser @RequestBody ou @param
   @GetMapping("/users")
-  User findUserEmail(@RequestParam("email") String email);
+  User findUserEmail(@QueryParam("email") String email);
 
   @PutMapping("/users")
   void updatePassword(@RequestBody Credentials credentials);
