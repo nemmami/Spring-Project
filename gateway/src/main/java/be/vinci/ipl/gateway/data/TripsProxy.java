@@ -22,7 +22,7 @@ public interface TripsProxy {
 
 //pas sur de la façon dont j'ai fait tt ça tout param sont optionels ici
 @GetMapping("/trips")
-ArrayList<Trip> getListTrips(@RequestParam("departure_date") String departureDate,
+Iterable<Trip> getListTrips(@RequestParam("departure_date") String departureDate,
     @RequestParam("originLon") String originLon, @RequestParam("destinationLat") String destinationLat,
     @RequestParam("destinationLon") String destinationLon);
 
@@ -34,7 +34,7 @@ ArrayList<Trip> getListTrips(@RequestParam("departure_date") String departureDat
   void deleteTrip(@PathVariable int id);
 
 @GetMapping("/trips/{id}/passengers")
-  ArrayList<Passengers> getPassengerList(@PathVariable int id);
+Iterable<Passengers> getPassengerList(@PathVariable int id);
 
 @PostMapping("/trips/{trip_id}/passengers/{user_id}")
   void addPasengerToTrip(@PathVariable int trip_id, @PathVariable int user_id);

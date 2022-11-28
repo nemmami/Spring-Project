@@ -37,13 +37,13 @@ public interface UsersProxy {
   void deleteUser(@PathVariable int id);
 
   @GetMapping("/users/{id}/driver")
-  ArrayList<Trip> getFutureDriverTrips(@PathVariable int id);
+  Iterable<Trip> getFutureDriverTrips(@PathVariable int id);
 
   @GetMapping("/users/{id}/passenger")
-  ArrayList<Trip> getFuturePassengerTrips(@PathVariable int id);
+  Iterable<Trip> getFuturePassengerTrips(@PathVariable int id);
 
   @GetMapping("/users/{id}/notifications")
-  ArrayList<Notification> getUserNotification(@PathVariable int id);
+  Iterable<Notification> getUserNotification(@PathVariable int id);
 
   @DeleteMapping("/users/{id}/notifications")
   void deleteAllUserNotification(@PathVariable int id);
