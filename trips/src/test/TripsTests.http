@@ -1,0 +1,41 @@
+###Create one trip
+POST http://localhost:9003/trips
+Content-Type: application/json
+
+{
+  "origin": {
+    "latitude": 1234.5678,
+    "longitude": 1234.5678
+  },
+  "destination": {
+    "latitude": 1.5678,
+    "longitude": 1234.5678
+  },
+  "departureDate": "2022-12-12",
+  "driverId": 2,
+  "availableSeatigng": 4
+}
+
+###Read one trip
+GET http://localhost:9003/trips/1
+Content-Type: application/json
+
+###Read the trips of a driver
+GET http://localhost:9003/trips/driver/1
+Content-Type: application/json
+
+###Delete one trip
+DELETE http://localhost:9003/trips/1
+Content-Type: application/json
+
+###Delete all trips of a driver
+DELETE http://localhost:9003/trips/driver/1
+Content-Type: application/json
+
+###Get 20 firsts trips
+GET http://localhost:9003/trips
+Content-Type: application/json
+
+###CalculatedDistance
+GET http://localhost:9003/calculatedDistance/2
+Content-Type: application/json
