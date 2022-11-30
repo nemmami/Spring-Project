@@ -35,7 +35,3 @@ Content-Type: application/json
 ###Get 20 firsts trips
 GET http://localhost:8080/trips
 Content-Type: application/json
-
-###CalculatedDistance
-GET http://localhost:8080/calculatedDistance/2
-Content-Type: application/json
