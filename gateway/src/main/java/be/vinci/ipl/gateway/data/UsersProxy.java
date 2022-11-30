@@ -17,35 +17,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "users")
 public interface UsersProxy {
 
-  @PostMapping("users")
-  void createUser( @RequestBody NewUser user);
+  @PostMapping("/users/{email}")
+  // maybe NewUser and not user
+  // not shure if should use mail or ID for user --> prob id
+  void createUser(@PathVariable String email, @RequestBody User user);
 
 
-  @GetMapping("/users")
-  User findUserEmail(@QueryParam("email") String email);
+  @GetMapping("/users/{email}")
+  User readeUser(@PathVariable String email);
 
-  @PutMapping("/users")
-  void updatePassword(@RequestBody Credentials credentials);
+  @PutMapping("/users/{email}")
+  void updateUser(@PathVariable String email,@RequestBody User user);
 
-  @GetMapping("/users/{id}")
-  User getUserInfo(@PathVariable int id);
 
-  @PutMapping("/users/{id}")
-  void updateUserInfo(@PathVariable int id, @RequestBody User user );
+  @DeleteMapping("/users/{email}")
+  void deleteUser(@PathVariable String email);
 
-  @DeleteMapping("/users/{id}")
-  void deleteUser(@PathVariable int id);
-
-  @GetMapping("/users/{id}/driver")
-  Iterable<Trip> getFutureDriverTrips(@PathVariable int id);
-
-  @GetMapping("/users/{id}/passenger")
-  Iterable<Trip> getFuturePassengerTrips(@PathVariable int id);
-
-  @GetMapping("/users/{id}/notifications")
-  Iterable<Notification> getUserNotification(@PathVariable int id);
-
-  @DeleteMapping("/users/{id}/notifications")
-  void deleteAllUserNotification(@PathVariable int id);
 
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface TripsProxy {
 
 @PostMapping("/trips")
-  void createTrip(@RequestBody NewTrip newTrip);
+  Trip createTrip(@RequestBody NewTrip newTrip);
 
 
 @GetMapping("/trips")
@@ -32,18 +32,9 @@ Iterable<Trip> getListTrips(@QueryParam("departure_date") String departureDate,
 @DeleteMapping("trips/{id}")
   void deleteTrip(@PathVariable int id);
 
-@GetMapping("/trips/{id}/passengers")
-Iterable<Passengers> getPassengerList(@PathVariable int id);
+@GetMapping("/trips/driver/{id}")
+  Iterable<Trip> getAllTripsWhereUserIsDriver(@PathVariable int id);
 
-@PostMapping("/trips/{trip_id}/passengers/{user_id}")
-  void addPasengerToTrip(@PathVariable int trip_id, @PathVariable int user_id);
-
-@GetMapping("/trips/{trip_id}/passengers/{user_id}")
-  String getPassengerStatus(@PathVariable int trip_id, @PathVariable int user_id);
-
-@PutMapping("/trips/{trip_id}/passengers/{user_id}")
-  void updatePassengerStatus(@PathVariable int trip_id, @PathVariable int user_id, @RequestParam("status") String status);
-
-@DeleteMapping("/trips/{trip_id}/passengers/{user_id}")
-  void removePassengerFromTrip(@PathVariable int trip_id, @PathVariable int user_id);
+@DeleteMapping("/trips/driver/{id}")
+  void deleteAllTripsWhereUserIsDriver(@PathVariable int id);
 }
