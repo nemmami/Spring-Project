@@ -69,38 +69,6 @@ paths:
         200:
           description: All notifications are deleted
 
-  /notifications/trip/passengers/{id}:
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          example: 1
-        description: ID of the passenger
-    get:
-      summary: Get user notifications
-      security:
-        - authentication:
-            - specific_user
-      responses:
-        401:
-          description: Missing authentication
-        403:
-          description: Not identified as the corresponding user
-        404:
-          description: No user found with this ID
-        200:
-          description: Sent user notifications
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/notification'
-   
-
-
 components:
   schemas:
     notification:

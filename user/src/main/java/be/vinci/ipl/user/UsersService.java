@@ -1,6 +1,5 @@
 package be.vinci.ipl.user;
 
-import lombok.Value;
 import org.springframework.stereotype.Service;
 
 @Service
