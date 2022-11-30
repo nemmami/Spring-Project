@@ -13,45 +13,24 @@ import lombok.ToString;
 @ToString
 public class PassengerUsers {
 
-  private List<Long> pending = new ArrayList<>();
-  private List<Long> accepted = new ArrayList<>();
-  private List<Long> refused = new ArrayList<>();
+  private List<User> pending = new ArrayList<>();
+  private List<User> accepted = new ArrayList<>();
+  private List<User> refused = new ArrayList<>();
 
   public PassengerUsers() {
   }
 
-  public void addUserPending(long user) {
+  public void addUserPending(User user) {
     pending.add(user);
   }
 
-  public void addUserAccepted(long user) {
+  public void addUserAccepted(User user) {
     accepted.add(user);
   }
 
-  public void addUserRefused(long user) {
+  public void addUserRefused(User user) {
     refused.add(user);
   }
 
-//  private Map<String, List<User>> pending = new HashMap<>();
-//  private Map<String, List<User>> accepted = new HashMap<>();
-//  private Map<String, List<User>> refused = new HashMap<>();
-//
-//  public PassengerUsers() {
-//    pending.put("pending", new ArrayList<>());
-//    accepted.put("accepted", new ArrayList<>());
-//    refused.put("refused", new ArrayList<>());
-//  }
-//
-//  public void addUserPending(User user){
-//    pending.get("pending").add(user);
-//  }
-//
-//  public void addUserAccepted(User user){
-//    accepted.get("accepted").add(user);
-//  }
-//
-//  public void addUserRefused(User user){
-//    refused.get("refused").add(user);
-//  }
 
 }

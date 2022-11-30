@@ -1,5 +1,7 @@
 package be.vinci.ipl.projet.passengers.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +11,10 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
+@Entity(name = "users")
 public class User {
-
-  private int id;
+  @Id
+  private Integer id;
   private String email;
   private String firstname;
   private String lastname;

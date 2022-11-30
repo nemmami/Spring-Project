@@ -106,23 +106,13 @@ public class PassengersService {
 
     for (Passenger p : pass) {
       if (p.getStatus().equals(PassengerStatus.PENDING)) {
-        listUsers.addUserPending(p.getUserId());
+        listUsers.addUserPending(usersProxy.readOne(p.getUserId()));
       } else if (p.getStatus().equals(PassengerStatus.ACCEPTED)) {
-        listUsers.addUserAccepted(p.getUserId());
+        listUsers.addUserAccepted(usersProxy.readOne(p.getUserId()));
       } else {
-        listUsers.addUserRefused(p.getUserId());
+        listUsers.addUserRefused(usersProxy.readOne(p.getUserId()));
       }
     }
-
-    //    for (Passenger p : pass) {
-//      if (p.getStatus().equals(PassengerStatus.PENDING)) {
-//        listUsers.addUserPending(usersProxy.readOne(p.getUserId()));
-//      } else if (p.getStatus().equals(PassengerStatus.ACCEPTED)) {
-//        listUsers.addUserAccepted(usersProxy.readOne(p.getUserId()));
-//      } else {
-//        listUsers.addUserRefused(usersProxy.readOne(p.getUserId()));
-//      }
-//    }
 
     return listUsers;
   }
