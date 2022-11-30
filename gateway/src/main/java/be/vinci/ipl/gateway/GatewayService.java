@@ -49,12 +49,13 @@ public class GatewayService {
    return usersProxy.getUserInfo(id);
   }
 
-  public void upateUserInfo(int id, User user){
+  public void updateUserInfo(int id, User user){
     usersProxy.updateUserInfo(id, user);
   }
 
-  public void deleteUser(User user){
-    usersProxy.deleteUser(user.getId());
+  public void deleteUser(int id){
+    usersProxy.deleteUser(id);
+    User user = usersProxy.getUserInfo(id);
     authenticationProxy.deletCredentials(user.getEmail());
     //tripsProxy.deleteTrip(xx);
   }
