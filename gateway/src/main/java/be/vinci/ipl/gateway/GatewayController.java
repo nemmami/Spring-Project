@@ -2,10 +2,13 @@ package be.vinci.ipl.gateway;
 
 
 import be.vinci.ipl.gateway.models.Credentials;
+import be.vinci.ipl.gateway.models.NewTrip;
 import be.vinci.ipl.gateway.models.NewUser;
 import be.vinci.ipl.gateway.models.Notification;
+import be.vinci.ipl.gateway.models.Passengers;
 import be.vinci.ipl.gateway.models.Trip;
 import be.vinci.ipl.gateway.models.User;
+import javax.ws.rs.QueryParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +25,13 @@ public class GatewayController {
     this.service = service;
   }
 
+  // authproxy
   @PostMapping("/auth")
   String  connect(@RequestBody Credentials credentials){
     return service.connect(credentials);
   }
 
+  //usersProxy
   @PostMapping("/users")
   ResponseEntity<Void> createUser(@RequestBody NewUser newUser){
     service.createUser(newUser);
@@ -101,7 +106,93 @@ public class GatewayController {
 
   }
 
+  //TripsProxy
 
+  @PostMapping("/trips")
+  ResponseEntity<Void> createTrip(@RequestBody NewTrip newTrip,@RequestHeader("Authorization") String token){
+    return new ResponseEntity<>(HttpStatus.ACCEPTED);
+  }
+
+
+  @GetMapping("/trips")
+  Iterable<Trip> getListTrips(@QueryParam("departure_date") String departureDate,
+      @QueryParam("originLon") String originLon, @QueryParam("destinationLat") String destinationLat,
+      @QueryParam("destinationLon") String destinationLon) {
+    return service.getListTrips(departureDate,originLon,destinationLat,destinationLon);
+  }
+
+
+  @GetMapping("/trips/{id}")
+  Trip getTripInfo(@PathVariable int id){
+      return service.getTripInfo(id);
+  }
+
+  @DeleteMapping("trips/{id}")
+  ResponseEntity<Void> deleteTrip(@PathVariable int id, @RequestHeader("Authorization") String token){
+    // first get driver id
+    int userId = service.getTripInfo(id).getDirverId();
+    // use driver id to find driver
+    User user = service.getUserInfo(userId);
+    // verify user
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+    service.deletTrip(id);
+    return new ResponseEntity<>(HttpStatus.ACCEPTED);
+  }
+
+  @GetMapping("/trips/{id}/passengers")
+  Iterable<Passengers> getPassengerList(@PathVariable int id, @RequestHeader("Authorization") String token){
+    // first get driver id
+    int userId = service.getTripInfo(id).getDirverId();
+    // use driver id to find driver
+    User user = service.getUserInfo(userId);
+    // verify user
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+    return service.getPassangerList(id);
+  }
+
+  @PostMapping("/trips/{trip_id}/passengers/{user_id}")
+  ResponseEntity<Void> addPasengerToTrip(@PathVariable int trip_id, @PathVariable int user_id, @RequestHeader("Authorization") String token){
+    User user = service.getUserInfo(user_id);
+    // verify user
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+    service.addPasengerToTrip(trip_id, user_id);
+    return new ResponseEntity<>(HttpStatus.ACCEPTED);
+  }
+
+  @GetMapping("/trips/{trip_id}/passengers/{user_id}")
+  String getPassengerStatus(@PathVariable int trip_id, @PathVariable int user_id,@RequestHeader("Authorization") String token){
+    // use driver id to find driver
+    User user = service.getUserInfo(user_id);
+    // verify user
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+    return service.getPassengerStatus(trip_id,user_id);
+  }
+
+  @PutMapping("/trips/{trip_id}/passengers/{user_id}")
+  ResponseEntity<Void> updatePassengerStatus(@PathVariable int trip_id, @PathVariable int user_id, @RequestParam("status") String status, @RequestHeader("Authorization") String token){
+    // use driver id to find driver
+    User user = service.getUserInfo(user_id);
+    // verify user
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+     service.updatePassengerStatus(trip_id, user_id, status);
+    return new ResponseEntity<>(HttpStatus.ACCEPTED);
+  }
+
+  @DeleteMapping("/trips/{trip_id}/passengers/{user_id}")
+  ResponseEntity<Void> removePassengerFromTrip(@PathVariable int trip_id, @PathVariable int user_id, @RequestHeader("Authorization") String token){
+    // use driver id to find driver
+    User user = service.getUserInfo(user_id);
+    // verify user
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+    service.removePassengerFromTrip(trip_id, user_id);
+    return new ResponseEntity<>(HttpStatus.ACCEPTED);
+}
 
 
 }
