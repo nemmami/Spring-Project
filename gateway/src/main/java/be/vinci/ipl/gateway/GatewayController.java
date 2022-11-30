@@ -3,6 +3,8 @@ package be.vinci.ipl.gateway;
 
 import be.vinci.ipl.gateway.models.Credentials;
 import be.vinci.ipl.gateway.models.NewUser;
+import be.vinci.ipl.gateway.models.Notification;
+import be.vinci.ipl.gateway.models.Trip;
 import be.vinci.ipl.gateway.models.User;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
@@ -60,11 +62,45 @@ public class GatewayController {
 
 
   @DeleteMapping("/users/{id}")
-  ResponseEntity<Void> deleteUser(@PathVariable int id){
-    service.deleteUser(id);
+  ResponseEntity<Void> deleteUser(@PathVariable int id,  @RequestHeader("Authorization") String token){
+    //verification
+    User user = service.getUserInfo(id);
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
+    service.deleteUser(id);
     return new ResponseEntity<>(HttpStatus.ACCEPTED);
   }
+
+  @GetMapping("/users/{id}/driver")
+  Iterable<Trip> getFutureDriverTrips(@PathVariable int id){
+
+    return service.getFutureDriverTrips(id);
+  }
+
+  @GetMapping("/users/{id}/passenger")
+  Iterable<Trip> getFuturePassengerTrips(@PathVariable int id){
+
+    return  service.getFuturePassengerTrips(id);
+  }
+
+  @GetMapping("/users/{id}/notifications")
+  Iterable<Notification> getUserNotification(@PathVariable int id){
+    return service.getUserNotification(id);
+  }
+
+  @DeleteMapping("/users/{id}/notifications")
+  ResponseEntity<Void> deleteAllUserNotification(@PathVariable int id,  @RequestHeader("Authorization") String token){
+
+    User user = service.getUserInfo(id);
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+
+    service.deleteAllUserNotification(id);
+    return new ResponseEntity<>(HttpStatus.ACCEPTED);
+
+  }
+
 
 
 
