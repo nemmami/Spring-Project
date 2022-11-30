@@ -1,0 +1,3 @@
+###CalculatedDistance
+GET http://localhost:9001/calculatedDistance/2
+Content-Type: application/json
