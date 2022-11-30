@@ -80,8 +80,8 @@ public class GatewayService {
     tripsProxy.createTrip(newTrip);
   }
 
-  public void getListTrips(String dateDeparture, String originLon, String destinationLat, String destinationLon){
-    tripsProxy.getListTrips(dateDeparture,originLon,destinationLat,destinationLon);
+  public Iterable<Trip> getListTrips(String dateDeparture, String originLon, String destinationLat, String destinationLon){
+    return tripsProxy.getListTrips(dateDeparture,originLon,destinationLat,destinationLon);
   }
 
   public Trip getTripInfo(int id){
