@@ -53,7 +53,12 @@ public class GatewayController {
 
 
   @GetMapping("/users/{id}")
-  User getUserInfo(@PathVariable int id){
+  User getUserInfo(@PathVariable int id, @RequestHeader("Authorization") String token ){
+    //verification
+    User user = service.getUserInfo(id);
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+
     return service.getUserInfo(id);
   }
 
@@ -78,19 +83,29 @@ public class GatewayController {
   }
 
   @GetMapping("/users/{id}/driver")
-  Iterable<Trip> getFutureDriverTrips(@PathVariable int id){
+  Iterable<Trip> getFutureDriverTrips(@PathVariable int id, @RequestHeader("Authorization") String token ){
+    User user = service.getUserInfo(id);
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
     return service.getFutureDriverTrips(id);
   }
 
   @GetMapping("/users/{id}/passenger")
-  Iterable<Trip> getFuturePassengerTrips(@PathVariable int id){
+  Iterable<Trip> getFuturePassengerTrips(@PathVariable int id, @RequestHeader("Authorization") String token ){
+    User user = service.getUserInfo(id);
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
     return  service.getFuturePassengerTrips(id);
   }
 
   @GetMapping("/users/{id}/notifications")
-  Iterable<Notification> getUserNotification(@PathVariable int id){
+  Iterable<Notification> getUserNotification(@PathVariable int id, @RequestHeader("Authorization") String token ){
+    User user = service.getUserInfo(id);
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+
     return service.getUserNotification(id);
   }
 
