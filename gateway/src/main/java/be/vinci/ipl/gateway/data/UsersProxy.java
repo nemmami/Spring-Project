@@ -17,10 +17,10 @@ public interface UsersProxy {
   @PostMapping("/users/")
   // maybe NewUser and not user
   // not shure if should use mail or ID for user --> prob id
-  void createUser( @RequestBody NewUser user);
+  User createUser( @RequestBody NewUser user);
 
   @GetMapping("/users/{email}")
-  User readeUserByMail(@PathVariable String mail);
+  User readeUserByMail(@PathVariable String email);
 
 
   @GetMapping("/users/{id}")

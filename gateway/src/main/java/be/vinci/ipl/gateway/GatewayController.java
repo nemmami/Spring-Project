@@ -34,9 +34,8 @@ public class GatewayController {
 
   //usersProxy
   @PostMapping("/users")
-  ResponseEntity<Void> createUser(@RequestBody NewUser newUser){
-    service.createUser(newUser);
-    return new ResponseEntity<>(HttpStatus.CREATED);
+  User createUser(@RequestBody NewUser newUser){
+    return  service.createUser(newUser);
   }
 
   @GetMapping("/users")

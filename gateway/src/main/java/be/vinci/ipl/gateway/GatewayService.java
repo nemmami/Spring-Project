@@ -52,12 +52,11 @@ public class GatewayService {
    * @param newUser the user to create
    * @return the new user
    */
-  public void createUser(NewUser newUser){
+  public User createUser(NewUser newUser){
     authenticationProxy.createCredentials(newUser.getEmail(), new Credentials(newUser.getEmail(),
         newUser.getPassword()));
-    usersProxy.createUser( newUser);
-    // TODO
-    // return usersProxy.createUser( newUser);
+
+     return usersProxy.createUser( newUser);
   }
 
 
