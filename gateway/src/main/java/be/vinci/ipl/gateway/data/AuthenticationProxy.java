@@ -15,13 +15,13 @@ public interface AuthenticationProxy {
   @PostMapping("/authentication/verify")
   String verify(@RequestBody String token);
 
-  @PostMapping("/authentication/{pseudo}")
+  @PostMapping("/authentication/{email}")
   void createCredentials(@PathVariable String email, @RequestBody Credentials credentials);
 
-  @PutMapping("/authentication/{pseudo}")
+  @PutMapping("/authentication/{email}")
   void updateCredentials(@PathVariable String email, @RequestBody Credentials credentials);
 
-  @DeleteMapping("/authentication/{pseudo}")
+  @DeleteMapping("/authentication/{email}")
   void deletCredentials(@PathVariable String email);
 
 
