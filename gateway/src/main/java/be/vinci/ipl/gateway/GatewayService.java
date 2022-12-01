@@ -133,9 +133,9 @@ public class GatewayService {
    * @param id of the user
    * @return all the trips
    */
-  public Iterable<Trip> getFuturePassengerTrips(int id){
-    //TODO
-    return null;
+  public PassengerTrips getFuturePassengerTrips(int id){
+    return passengersProxy.getAllTripsFromPassenger(id);
+
   }
 
   /**

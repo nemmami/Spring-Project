@@ -1,6 +1,7 @@
 package be.vinci.ipl.gateway.data;
 
 
+import be.vinci.ipl.gateway.models.PassengerTrips;
 import be.vinci.ipl.gateway.models.Passengers;
 import be.vinci.ipl.gateway.models.User;
 import javax.ws.rs.QueryParam;
@@ -40,8 +41,8 @@ public interface PassengersProxy {
   @DeleteMapping("/passengers/users/{user_id}")
   void deletePassengersOfUser(@PathVariable int user_id);
 
-  @GetMapping("/passengers/users/{userId}")
-  Iterable<Passengers> getAllTripsFromPassenger(@PathVariable int userId);
+  @GetMapping("/passengers/users/{userId}/passenger")
+  PassengerTrips getAllTripsFromPassenger(@PathVariable int userId);
 
 
 }

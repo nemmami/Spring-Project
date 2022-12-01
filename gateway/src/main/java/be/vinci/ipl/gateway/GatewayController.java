@@ -5,6 +5,7 @@ import be.vinci.ipl.gateway.models.Credentials;
 import be.vinci.ipl.gateway.models.NewTrip;
 import be.vinci.ipl.gateway.models.NewUser;
 import be.vinci.ipl.gateway.models.Notification;
+import be.vinci.ipl.gateway.models.PassengerTrips;
 import be.vinci.ipl.gateway.models.Passengers;
 import be.vinci.ipl.gateway.models.Trip;
 import be.vinci.ipl.gateway.models.User;
@@ -92,7 +93,7 @@ public class GatewayController {
   }
 
   @GetMapping("/users/{id}/passenger")
-  Iterable<Trip> getFuturePassengerTrips(@PathVariable int id, @RequestHeader("Authorization") String token ){
+  PassengerTrips getFuturePassengerTrips(@PathVariable int id, @RequestHeader("Authorization") String token ){
     User user = service.getUserInfo(id);
     String userMail = service.verify(token);
     if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
