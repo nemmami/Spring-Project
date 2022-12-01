@@ -25,6 +25,27 @@ paths:
         201:
           description: User created
 
+  /users/{email}:
+    parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: String
+          example: test@gmail.com
+        description: email of the user
+    get:
+      summary: Read a user
+      responses:
+        404:
+          description: User not found
+        200:
+          description: User found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/user'
+
   /users/{id}:
     parameters:
       - name: id
