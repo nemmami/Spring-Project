@@ -13,6 +13,5 @@ public class Passenger {
   private int id;
   private int tripId;
   private int userId;
-
   private PassengerStatus status;
 }
