@@ -16,10 +16,10 @@ public class UsersService {
      * @param user User to create
      * @return true if the user could be created, false if another user exists with this pseudo
      */
-    public boolean createOne(User user) {
-        if (repository.existsById(user.getId())) return false;
+    public User createOne(User user) {
+        if (repository.existsById(user.getId())) return null;
         repository.save(user);
-        return true;
+        return user;
     }
 
     /**
