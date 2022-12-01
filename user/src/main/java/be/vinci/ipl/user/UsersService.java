@@ -17,7 +17,7 @@ public class UsersService {
      * @return true if the user could be created, false if another user exists with this pseudo
      */
     public boolean createOne(User user) {
-        if (repository.existsById(user.getEmail())) return false;
+        if (repository.existsById(user.getId())) return false;
         repository.save(user);
         return true;
     }
@@ -28,7 +28,7 @@ public class UsersService {
      * @return The user found, or null if the user couldn't be found
      */
     public User readOne(int id) {
-        return repository.findById(String.valueOf(id)).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 
     /**
@@ -37,7 +37,7 @@ public class UsersService {
      * @return True if the user could be updated, false if the user couldn't be found
      */
     public boolean updateOne(User user) {
-        if (!repository.existsById(String.valueOf(user.getId()))) return false;
+        if (!repository.existsById(user.getId())) return false;
         repository.save(user);
         return true;
     }
@@ -48,8 +48,8 @@ public class UsersService {
      * @return True if the user could be deleted, false if the user couldn't be found
      */
     public boolean deleteOne(int id) {
-        if (!repository.existsById(String.valueOf(id))) return false;
-        repository.deleteById(String.valueOf(id));
+        if (!repository.existsById(id)) return false;
+        repository.deleteById(id);
         return true;
     }
 
