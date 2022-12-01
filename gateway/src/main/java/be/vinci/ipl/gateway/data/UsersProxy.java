@@ -20,18 +20,18 @@ public interface UsersProxy {
   @PostMapping("/users/{email}")
   // maybe NewUser and not user
   // not shure if should use mail or ID for user --> prob id
-  void createUser(@PathVariable String email, @RequestBody User user);
+  void createUser(@PathVariable String email, @RequestBody NewUser user);
 
 
-  @GetMapping("/users/{email}")
-  User readeUser(@PathVariable String email);
+  @GetMapping("/users/{id}")
+  User readeUser(@PathVariable int id);
 
-  @PutMapping("/users/{email}")
-  void updateUser(@PathVariable String email,@RequestBody User user);
+  @PutMapping("/users/{id}")
+  void updateUser(@PathVariable int id,@RequestBody User user);
 
 
-  @DeleteMapping("/users/{email}")
-  void deleteUser(@PathVariable String email);
+  @DeleteMapping("/users/{id}")
+  void deleteUser(@PathVariable int id);
 
 
 }
