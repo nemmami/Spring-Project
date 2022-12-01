@@ -88,7 +88,7 @@ public class GatewayController {
     String userMail = service.verify(token);
     if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
-    return service.getDriverTrips(id);
+    return service.getFutureDriverTrips(id);
   }
 
   @GetMapping("/users/{id}/passenger")
@@ -97,7 +97,7 @@ public class GatewayController {
     String userMail = service.verify(token);
     if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
-    return  service.getPassengerTrips(id);
+    return  service.getFuturePassengerTrips(id);
   }
 
   @GetMapping("/users/{id}/notifications")
