@@ -32,6 +32,15 @@ public class UsersService {
     }
 
     /**
+     * Reads a user
+     * @param email id of the user
+     * @return The user found, or null if the user couldn't be found
+     */
+    public User readOneEmail(String email) {
+        return repository.findByEmail(email).orElse(null);
+    }
+
+    /**
      * Updates a user
      * @param user User to update
      * @return True if the user could be updated, false if the user couldn't be found

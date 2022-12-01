@@ -26,9 +26,9 @@ public class AuthenticationController {
 
     @PostMapping("/authentication/verify")
     public String verify(@RequestBody String token) {
-        String pseudo = service.verify(token);
-        if (pseudo == null) throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-        return pseudo;
+        String email = service.verify(token);
+        if (email == null) throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        return email;
     }
 
 

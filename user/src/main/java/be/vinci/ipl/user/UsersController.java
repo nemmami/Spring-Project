@@ -32,6 +32,13 @@ public class UsersController {
         return user;
     }
 
+    @GetMapping("/users/{email}")
+    public User readOneEmail(@PathVariable String email) {
+        User user = service.readOneEmail(email);
+        if (user == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        return user;
+    }
+
     @PutMapping("/users/{id}")
     public void updateOne(@PathVariable int id, @RequestBody User user) {
         if (user.getEmail() == null || 
