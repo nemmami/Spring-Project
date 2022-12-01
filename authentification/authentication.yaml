@@ -4,7 +4,7 @@ info:
   description: Microservice handling authentication
   version: 1.0.0
 servers:
-  - url: 'http://localhost:9004'
+  - url: http://localhost:9004
     description: Development server
 paths:
 
