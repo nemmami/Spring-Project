@@ -88,7 +88,7 @@ public class GatewayController {
     String userMail = service.verify(token);
     if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
-    return service.getFutureDriverTrips(id);
+    return service.getDriverTrips(id);
   }
 
   @GetMapping("/users/{id}/passenger")
@@ -97,7 +97,7 @@ public class GatewayController {
     String userMail = service.verify(token);
     if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 
-    return  service.getFuturePassengerTrips(id);
+    return  service.getPassengerTrips(id);
   }
 
   @GetMapping("/users/{id}/notifications")
@@ -125,15 +125,22 @@ public class GatewayController {
 
   @PostMapping("/trips")
   ResponseEntity<Void> createTrip(@RequestBody NewTrip newTrip,@RequestHeader("Authorization") String token){
+    // get right user
+    int driverID=  newTrip.getDirverId();
+    User user = service.getUserInfo(driverID);
+    String userMail = service.verify(token);
+    if (!userMail.equals(user.getEmail())) throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+
+    service.createTrip(newTrip);
     return new ResponseEntity<>(HttpStatus.ACCEPTED);
   }
 
 
   @GetMapping("/trips")
   Iterable<Trip> getListTrips(@QueryParam("departure_date") String departureDate,
-      @QueryParam("originLon") String originLon, @QueryParam("destinationLat") String destinationLat,
-      @QueryParam("destinationLon") String destinationLon) {
-    return service.getListTrips(departureDate,originLon,destinationLat,destinationLon);
+      @QueryParam("originLon") String originLon, @QueryParam("originLat") String originLat, @QueryParam("destinationLat") String destinationLon ,
+      @QueryParam("destinationLon") String  destinationLat) {
+    return service.getListTrips(departureDate,originLon,originLat,destinationLon,destinationLat);
   }
 
 

@@ -19,7 +19,8 @@ public interface TripsProxy {
 
 
 @GetMapping("/trips")
-Iterable<Trip> getListTrips(@QueryParam("departure_date") String departureDate,
+Iterable<Trip> getListTrips(String dateDeparture,
+    @QueryParam("departure_date") String departureDate,
     @QueryParam("originLon") String originLon, @QueryParam("destinationLat") String destinationLat,
     @QueryParam("destinationLon") String destinationLon);
 
