@@ -14,7 +14,7 @@ import lombok.ToString;
 @Entity(name = "users")
 public class User {
   @Id
-  private Integer id;
+  private int id;
   private String email;
   private String firstname;
   private String lastname;
