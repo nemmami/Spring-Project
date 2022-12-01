@@ -7,6 +7,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 public class Position {
+
   private double latitude;
   private double longitude;
 }

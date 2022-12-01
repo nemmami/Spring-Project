@@ -68,7 +68,7 @@ public class PassengersService {
    * @param tripId the id trip of the passenger
    * @param userId the id user of the passenger
    * @param status the status that the passenger will have
-   * @return True if the passenger was updated, or false if it couldn't be found
+   * @return True if the passenger was updated, or false if it couldn't be found or status not good
    */
   public boolean updateOne(int tripId, int userId, String status) {
     if (!repository.existsByTripIdAndUserId(tripId, userId)) {
@@ -103,8 +103,8 @@ public class PassengersService {
   /**
    * Reads all passengers from a trip, Find the accepted, refused and pending users from a trip
    *
-   * @param tripId Pseudo of the user
-   * @return The list of reviews from this user
+   * @param tripId the id trip of a passenger
+   * @return The list of passengers from this trip
    */
   public PassengerUsers readFromTrip(int tripId) {
     List<Passenger> pass = (List<Passenger>) repository.findByTripId(tripId);
@@ -127,8 +127,8 @@ public class PassengersService {
   /**
    * Get trips where user is a passenger with a future departure date by status
    *
-   * @param userId Pseudo of the user
-   * @return The list of reviews from this user
+   * @param userId the id user of a passenger
+   * @return The list of passengers from this user
    */
   public PassengerTrips readFromPassenger(int userId) {
     List<Passenger> pass = (List<Passenger>) repository.findByUserId(userId);
@@ -138,9 +138,11 @@ public class PassengersService {
     for (Passenger p : pass) {
       Trip t = tripsProxy.readOne(p.getTripId());
 
-      if(t.getDepartureDate().equals(null)) continue;
+      if (t.getDepartureDate().equals(null)) {
+        continue;
+      }
 
-      if (p.getStatus().equals(PassengerStatus.PENDING) ) {
+      if (p.getStatus().equals(PassengerStatus.PENDING)) {
         listTrips.addTripPending(t);
       } else if (p.getStatus().equals(PassengerStatus.ACCEPTED)) {
         listTrips.addTripAccepted(t);
@@ -161,7 +163,6 @@ public class PassengersService {
   public void deleteFromTrips(int tripId) {
     repository.deleteByTripId(tripId);
   }
-
 
 
   /**

@@ -8,6 +8,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 public class Trip {
+
   private int id;
   private Position origin;
   private Position destination;
