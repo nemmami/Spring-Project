@@ -30,6 +30,8 @@ GET http://localhost:9002/passengers/trips/1
 ### Delete all passengers from trip 1
 DELETE http://localhost:9002/passengers/trips/1
 
+### Get all passengers from user 2
+GET http://localhost:9002/passengers/users/2
 
 ### Delete all passengers from user 2
 DELETE http://localhost:9002/passengers/users/2
