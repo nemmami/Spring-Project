@@ -28,7 +28,7 @@ paths:
 
   /passengers/trips/{trip_id}:
     get:
-      summary: Find the accepted, refused and pending users from a trip
+      summary: Get list of passengers of a trip, with pending, accepted and refused status
       parameters:
         - name: trip_id
           in: path
@@ -54,13 +54,42 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/passengers'
+                  $ref: '#/components/schemas/passenger_users'
 
     delete:
       summary: Delete passengers from a trip
       responses:
         200:
           description: Passengers deleted
+
+
+  /users/{id}/passenger:
+    get:
+      summary: Get trips where user is a passenger with a future departure date by status
+      security:
+        - authentication:
+            - specific_user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+          description: ID of the user
+      responses:
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: No user found with this ID
+        200:
+          description: Sent user passenger trips
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/passenger_trips"
 
 
 
@@ -170,7 +199,7 @@ paths:
 components:
   schemas:
 
-    passengers:
+    passenger_users:
       type: object
       properties:
         pending:
@@ -185,6 +214,61 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/user'
+
+    passenger_trips:
+      type: object
+      properties:
+        pending:
+          type: array
+          items:
+            $ref: '#/components/schemas/trip'
+        accepted:
+          type: array
+          items:
+            $ref: '#/components/schemas/trip'
+        refused:
+          type: array
+          items:
+            $ref: '#/components/schemas/trip'
+
+    position:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+      example:
+        latitude: 50.849372
+        longitude: 4.451009
+
+    trip:
+      type: object
+      properties:
+        id:
+          type: integer
+        origin:
+          $ref: '#/components/schemas/position'
+        destination:
+          $ref: '#/components/schemas/position'
+        departure:
+          type: string
+          description: Date in ISO 8601, YYYY-MM-DD
+        driver_id:
+          type: integer
+        available_seating:
+          type: integer
+      example:
+        id: 38
+        origin:
+          latitude: 50.849372
+          longitude: 4.451009
+        destination:
+          latitude: 50.849372
+          longitude: 4.451009
+        departure: 2022-10-24 10:45:00
+        driver_id: 12
+        available_seating: 2
 
     user:
       type: object

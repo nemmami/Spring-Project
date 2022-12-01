@@ -22,13 +22,13 @@ public class Passenger {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
-  private long tripId;
-  private long userId;
+  private int id;
+  private int tripId;
+  private int userId;
   @Enumerated(EnumType.STRING)
   private PassengerStatus status;
 
-  public static Passenger defPassenger(long tripId, long userId) {
+  public static Passenger defPassenger(int tripId, int userId) {
     return new Passenger(0, tripId, userId, PassengerStatus.PENDING);
   }
 
