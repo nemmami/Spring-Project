@@ -2,6 +2,7 @@ package be.vinci.ipl.projet.passengers;
 
 import be.vinci.ipl.projet.passengers.models.Passenger;
 import be.vinci.ipl.projet.passengers.models.PassengerStatus;
+import be.vinci.ipl.projet.passengers.models.PassengerTrips;
 import be.vinci.ipl.projet.passengers.models.PassengerUsers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class PassengersController {
   }
 
   @PostMapping("/passengers/trips/{tripId}/users/{userId}")
-  public ResponseEntity<Passenger> createOne(@PathVariable long tripId, @PathVariable long userId) {
+  public ResponseEntity<Passenger> createOne(@PathVariable int tripId, @PathVariable int userId) {
     if (tripId == 0 || userId == 0) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
@@ -44,7 +45,7 @@ public class PassengersController {
   }
 
   @GetMapping("/passengers/trips/{tripId}/users/{userId}")
-  public PassengerStatus readOne(@PathVariable long tripId, @PathVariable long userId) {
+  public PassengerStatus readOne(@PathVariable int tripId, @PathVariable int userId) {
     Passenger review = service.readOne(tripId, userId);
     if (review == null) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -53,7 +54,7 @@ public class PassengersController {
   }
 
   @PutMapping("/passengers/trips/{tripId}/users/{userId}")
-  public void updateOne(@PathVariable long tripId, @PathVariable long userId,
+  public void updateOne(@PathVariable int tripId, @PathVariable int userId,
       @RequestParam(name = "status") String status) {
     if (!status.equals("accepted") && !status.equals("refused")) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -65,7 +66,7 @@ public class PassengersController {
   }
 
   @DeleteMapping("/passengers/trips/{tripId}/users/{userId}")
-  public void deleteOne(@PathVariable long tripId, @PathVariable long userId) {
+  public void deleteOne(@PathVariable int tripId, @PathVariable int userId) {
     boolean found = service.deleteOne(tripId, userId);
     if (!found) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -73,22 +74,23 @@ public class PassengersController {
   }
 
   @GetMapping("/passengers/trips/{tripId}")
-  public PassengerUsers readFromTrip(@PathVariable long tripId) {
+  public PassengerUsers readFromTrip(@PathVariable int tripId) {
     return service.readFromTrip(tripId);
   }
 
+  @GetMapping("/passengers/users/{userId}/passenger")
+  public PassengerTrips readFromPassenger(@PathVariable int userId) {
+    return service.readFromPassenger(userId);
+  }
+
   @DeleteMapping("/passengers/trips/{tripId}")
-  public void deleteFromTrips(@PathVariable long tripId) {
+  public void deleteFromTrips(@PathVariable int tripId) {
     service.deleteFromTrips(tripId);
   }
 
-  @GetMapping("/passengers/users/{userId}")
-  public Iterable<Passenger> readFromUsers(@PathVariable long userId) {
-    return service.readFromUsers(userId);
-  }
 
   @DeleteMapping("/passengers/users/{userId}")
-  public void deleteFromUsers(@PathVariable long userId) {
+  public void deleteFromUsers(@PathVariable int userId) {
     service.deleteFromUsers(userId);
   }
 
