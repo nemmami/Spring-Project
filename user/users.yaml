@@ -1,0 +1,126 @@
+openapi: 3.0.3
+info:
+  title: Groupe 12 users service
+  description: Microservice handling users
+  version: 1.0.0
+servers:
+  - url: http://localhost:9002
+    description: Development server
+paths:
+
+  /users:
+    post:
+      summary: Create a user
+      requestBody:
+        description: User to create
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/newUser'
+      responses:
+        400:
+          description: Incorrect user
+        409:
+          description: User exists
+        201:
+          description: User created
+
+  /users/{email}:
+    parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: String
+          example: test@gmail.com
+        description: email of the user
+    get:
+      summary: Read a user
+      responses:
+        404:
+          description: User not found
+        200:
+          description: User found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/user'
+
+  /users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 1
+        description: ID of the user
+    get:
+      summary: Read a user
+      responses:
+        404:
+          description: User not found
+        200:
+          description: User found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/user'
+
+    put:
+      summary: Update a user
+      requestBody:
+        description: New values of the user
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        400:
+          description: Incorrect user
+        404:
+          description: User not found
+        200:
+          description: User updated
+
+    delete:
+      summary: Delete a user
+      responses:
+        404:
+          description: User not found
+        200:
+          description: User deleted
+
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+      example:
+        id: 1
+        email: gregory.seront@vinci.be
+        firstname: Gregory
+        lastname: Seront
+    newUser:
+      type: object
+      properties:
+        email:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        password:
+          type: string
+      example:
+        email: gregory.seront@vinci.be
+        firstname: Gregory
+        lastname: Seront
