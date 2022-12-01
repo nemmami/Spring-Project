@@ -1,25 +1,28 @@
 ### READ ALL PASSENGERS
 GET http://localhost:9002/passengers
 
-### Create passenger for user 1
+### Create passenger in trip 1 for user 1
 POST http://localhost:9002/passengers/trips/1/users/1
 
-### Create passenger for user 2
+### Create passenger in trip 2 for user 1
+POST http://localhost:9002/passengers/trips/2/users/1
+
+### Create passenger in trip 1 for user 2
 POST http://localhost:9002/passengers/trips/1/users/2
 
-### Create passenger for user 3
+### Create passenger in trip 2 for user 3
 POST http://localhost:9002/passengers/trips/2/users/3
 
 
-### Read status of passenger for trip 1 and user 2
+### Read status of passenger for trip 1 of user 2
 GET http://localhost:9002/passengers/trips/1/users/2
 
 
-### Update passenger status for trip 1 and user 2
+### Update passenger status for trip 1 of user 2
 PUT http://localhost:9002/passengers/trips/1/users/2?status=accepted
 
 
-### Delete passenger for trip 1 and user 2
+### Delete passenger for trip 1 of user 2
 DELETE http://localhost:9002/passengers/trips/1/users/2
 
 
@@ -33,3 +36,6 @@ DELETE http://localhost:9002/passengers/trips/1
 
 ### Delete all passengers from user 2
 DELETE http://localhost:9002/passengers/users/2
+
+### Read all passengers from trip 1 in lists
+GET http://localhost:9002//passengers/users/2/passenger
