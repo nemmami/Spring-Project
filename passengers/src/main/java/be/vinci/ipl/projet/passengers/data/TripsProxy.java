@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface TripsProxy {
 
   @GetMapping("/trips/{id}")
-  Trip readOne(@PathVariable long id);
+  Trip readOne(@PathVariable int id);
 
 }

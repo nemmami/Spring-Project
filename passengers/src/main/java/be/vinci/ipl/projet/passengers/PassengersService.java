@@ -43,7 +43,7 @@ public class PassengersService {
    * @param userId the id user to create the passenger
    * @return The passenger created, or null if it already existed
    */
-  public Passenger createOne(long tripId, long userId) {
+  public Passenger createOne(int tripId, int userId) {
     if (repository.existsByTripIdAndUserId(tripId, userId)) {
       return null;
     }
@@ -58,7 +58,7 @@ public class PassengersService {
    * @param userId the id user of the passenger
    * @return The passenger, or null if it couldn't be found
    */
-  public Passenger readOne(long tripId, long userId) {
+  public Passenger readOne(int tripId, int userId) {
     return repository.findByTripIdAndUserId(tripId, userId).orElse(null);
   }
 
@@ -70,7 +70,7 @@ public class PassengersService {
    * @param status the status that the passenger will have
    * @return True if the passenger was updated, or false if it couldn't be found
    */
-  public boolean updateOne(long tripId, long userId, String status) {
+  public boolean updateOne(int tripId, int userId, String status) {
     if (!repository.existsByTripIdAndUserId(tripId, userId)) {
       return false;
     }
@@ -92,7 +92,7 @@ public class PassengersService {
    * @param userId the id user of the passenger
    * @return True if the passenger was deleted, false if it couldn't be found
    */
-  public boolean deleteOne(long tripId, long userId) {
+  public boolean deleteOne(int tripId, int userId) {
     if (!repository.existsByTripIdAndUserId(tripId, userId)) {
       return false;
     }
@@ -106,7 +106,7 @@ public class PassengersService {
    * @param tripId Pseudo of the user
    * @return The list of reviews from this user
    */
-  public PassengerUsers readFromTrip(long tripId) {
+  public PassengerUsers readFromTrip(int tripId) {
     List<Passenger> pass = (List<Passenger>) repository.findByTripId(tripId);
     System.out.println(pass.size());
     PassengerUsers listUsers = new PassengerUsers();
@@ -130,7 +130,7 @@ public class PassengersService {
    * @param userId Pseudo of the user
    * @return The list of reviews from this user
    */
-  public PassengerTrips readFromPassenger(long userId) {
+  public PassengerTrips readFromPassenger(int userId) {
     List<Passenger> pass = (List<Passenger>) repository.findByUserId(userId);
 
     PassengerTrips listTrips = new PassengerTrips();
@@ -157,7 +157,7 @@ public class PassengersService {
    *
    * @param tripId the id trip of the passenger
    */
-  public void deleteFromTrips(long tripId) {
+  public void deleteFromTrips(int tripId) {
     repository.deleteByTripId(tripId);
   }
 
@@ -168,7 +168,7 @@ public class PassengersService {
    *
    * @param userId the id user of the passenger
    */
-  public void deleteFromUsers(long userId) {
+  public void deleteFromUsers(int userId) {
     repository.deleteByUserId(userId);
   }
 

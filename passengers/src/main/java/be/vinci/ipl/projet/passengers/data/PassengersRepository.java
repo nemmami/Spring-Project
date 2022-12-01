@@ -8,21 +8,21 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PassengersRepository extends CrudRepository<Passenger, Long> {
+public interface PassengersRepository extends CrudRepository<Passenger, Integer> {
 
-  boolean existsByTripIdAndUserId(long tripId, long userId);
+  boolean existsByTripIdAndUserId(int tripId, int userId);
 
-  Optional<Passenger> findByTripIdAndUserId(long tripId, long userId);
-
-  @Transactional
-  void deleteByTripIdAndUserId(long tripId, long userId);
-
-  Iterable<Passenger> findByTripId(long tripId);
-
-  Iterable<Passenger> findByUserId(long userId);
+  Optional<Passenger> findByTripIdAndUserId(int tripId, int userId);
 
   @Transactional
-  void deleteByTripId(long tripId);
+  void deleteByTripIdAndUserId(int tripId, int userId);
+
+  Iterable<Passenger> findByTripId(int tripId);
+
+  Iterable<Passenger> findByUserId(int userId);
+
+  @Transactional
+  void deleteByTripId(int tripId);
 
   @Transactional
   void deleteByUserId(long userId);
