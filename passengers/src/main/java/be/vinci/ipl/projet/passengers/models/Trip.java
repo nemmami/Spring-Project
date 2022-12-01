@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
+@NoArgsConstructor
 public class Trip {
   private int id;
   private Position origin;
