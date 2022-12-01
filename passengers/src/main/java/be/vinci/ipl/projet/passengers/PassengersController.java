@@ -2,6 +2,7 @@ package be.vinci.ipl.projet.passengers;
 
 import be.vinci.ipl.projet.passengers.models.Passenger;
 import be.vinci.ipl.projet.passengers.models.PassengerStatus;
+import be.vinci.ipl.projet.passengers.models.PassengerTrips;
 import be.vinci.ipl.projet.passengers.models.PassengerUsers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,6 +76,11 @@ public class PassengersController {
   @GetMapping("/passengers/trips/{tripId}")
   public PassengerUsers readFromTrip(@PathVariable long tripId) {
     return service.readFromTrip(tripId);
+  }
+
+  @GetMapping("/passengers/users/{userId}/passenger")
+  public PassengerTrips readFromPassenger(@PathVariable long userId) {
+    return service.readFromPassenger(userId);
   }
 
   @DeleteMapping("/passengers/trips/{tripId}")

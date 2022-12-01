@@ -1,11 +1,14 @@
 package be.vinci.ipl.projet.passengers;
 
 import be.vinci.ipl.projet.passengers.data.PassengersRepository;
+import be.vinci.ipl.projet.passengers.data.TripsProxy;
 import be.vinci.ipl.projet.passengers.data.UsersProxy;
 
 import be.vinci.ipl.projet.passengers.models.Passenger;
 import be.vinci.ipl.projet.passengers.models.PassengerStatus;
+import be.vinci.ipl.projet.passengers.models.PassengerTrips;
 import be.vinci.ipl.projet.passengers.models.PassengerUsers;
+import be.vinci.ipl.projet.passengers.models.Trip;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +18,13 @@ public class PassengersService {
   private final PassengersRepository repository;
   private final UsersProxy usersProxy;
 
-  public PassengersService(PassengersRepository repository, UsersProxy usersProxy) {
+  private final TripsProxy tripsProxy;
+
+  public PassengersService(PassengersRepository repository, UsersProxy usersProxy,
+      TripsProxy tripsProxy) {
     this.repository = repository;
     this.usersProxy = usersProxy;
+    this.tripsProxy = tripsProxy;
   }
 
   /**
@@ -118,14 +125,32 @@ public class PassengersService {
   }
 
   /**
-   * Reads all passengers of a trip
+   * Get trips where user is a passenger with a future departure date by status
    *
-   * @param tripId the id trip of the passenger
-   * @return The list of passengers of this trip
+   * @param userId Pseudo of the user
+   * @return The list of reviews from this user
    */
-  public Iterable<Passenger> readFromTrips(long tripId) {
-    return repository.findByTripId(tripId);
+  public PassengerTrips readFromPassenger(long userId) {
+    List<Passenger> pass = (List<Passenger>) repository.findByUserId(userId);
+
+    PassengerTrips listTrips = new PassengerTrips();
+
+    for (Passenger p : pass) {
+      Trip t = tripsProxy.readOne(p.getTripId());
+      if(!t.getDeparture().isEmpty()) continue;
+
+      if (p.getStatus().equals(PassengerStatus.PENDING) ) {
+        listTrips.addUserPending(t);
+      } else if (p.getStatus().equals(PassengerStatus.ACCEPTED)) {
+        listTrips.addUserAccepted(t);
+      } else {
+        listTrips.addUserRefused(t);
+      }
+    }
+
+    return listTrips;
   }
+
 
   /**
    * Deletes all passengers of a trip
