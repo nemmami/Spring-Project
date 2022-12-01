@@ -82,10 +82,6 @@ public class PassengersController {
     service.deleteFromTrips(tripId);
   }
 
-  @GetMapping("/passengers/users/{userId}")
-  public Iterable<Passenger> readFromUsers(@PathVariable long userId) {
-    return service.readFromUsers(userId);
-  }
 
   @DeleteMapping("/passengers/users/{userId}")
   public void deleteFromUsers(@PathVariable long userId) {

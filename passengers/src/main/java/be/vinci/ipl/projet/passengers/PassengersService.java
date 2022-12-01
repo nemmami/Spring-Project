@@ -136,15 +136,7 @@ public class PassengersService {
     repository.deleteByTripId(tripId);
   }
 
-  /**
-   * Reads all passengers of a user
-   *
-   * @param userId Hathe id user of the passenger
-   * @return The list of passengers of this user
-   */
-  public Iterable<Passenger> readFromUsers(long userId) {
-    return repository.findByUserId(userId);
-  }
+
 
   /**
    * Deletes all passengers of a user
