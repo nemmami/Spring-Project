@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "users")
 public interface UsersProxy {
 
-  @PostMapping("/users/{email}")
+  @PostMapping("/users/")
   // maybe NewUser and not user
   // not shure if should use mail or ID for user --> prob id
-  void createUser(@PathVariable String email, @RequestBody NewUser user);
+  void createUser( @RequestBody NewUser user);
+
+  @GetMapping("/users/{email}")
+  User readeUserByMail(@PathVariable String mail);
 
 
   @GetMapping("/users/{id}")

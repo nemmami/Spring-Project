@@ -38,7 +38,7 @@ public class GatewayService {
   /**
    * verify a token
    *
-   * @param token
+   * @param token token
    * @return all passengers
    */
   public String verify(String token){
@@ -55,7 +55,9 @@ public class GatewayService {
   public void createUser(NewUser newUser){
     authenticationProxy.createCredentials(newUser.getEmail(), new Credentials(newUser.getEmail(),
         newUser.getPassword()));
-    usersProxy.createUser(newUser.getEmail(), newUser);
+    usersProxy.createUser( newUser);
+    // TODO
+    // return usersProxy.createUser( newUser);
   }
 
 
@@ -67,8 +69,7 @@ public class GatewayService {
    * @return the user
    */
   public User findUserByMail(String mail){
-    //TODO
-     return null;
+     return usersProxy.readeUserByMail(mail);
   }
 
 
@@ -86,7 +87,7 @@ public class GatewayService {
    * get user by ID
    *
    * @param id of the user
-   * @Return user
+   * @return user
    */
   public User getUserInfo(int id){
    return usersProxy.readeUser(id);
@@ -252,7 +253,6 @@ public class GatewayService {
    * @param trip_id the trip we want
    * @param user_id the user we need
    *
-   * @return the passenger status
    */
   public void removePassengerFromTrip(int trip_id, int user_id){
     passengersProxy.deletePassengerFromTrip(trip_id, user_id);
