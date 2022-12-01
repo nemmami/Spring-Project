@@ -137,14 +137,15 @@ public class PassengersService {
 
     for (Passenger p : pass) {
       Trip t = tripsProxy.readOne(p.getTripId());
-      if(!t.getDeparture().isEmpty()) continue;
+
+      if(t.getDepartureDate().equals(null)) continue;
 
       if (p.getStatus().equals(PassengerStatus.PENDING) ) {
-        listTrips.addUserPending(t);
+        listTrips.addTripPending(t);
       } else if (p.getStatus().equals(PassengerStatus.ACCEPTED)) {
-        listTrips.addUserAccepted(t);
+        listTrips.addTripAccepted(t);
       } else {
-        listTrips.addUserRefused(t);
+        listTrips.addTripRefused(t);
       }
     }
 

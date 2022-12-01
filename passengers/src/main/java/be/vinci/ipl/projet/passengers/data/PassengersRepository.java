@@ -25,5 +25,5 @@ public interface PassengersRepository extends CrudRepository<Passenger, Integer>
   void deleteByTripId(int tripId);
 
   @Transactional
-  void deleteByUserId(long userId);
+  void deleteByUserId(int userId);
 }

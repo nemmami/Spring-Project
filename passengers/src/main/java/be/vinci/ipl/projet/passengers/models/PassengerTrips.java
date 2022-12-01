@@ -2,7 +2,13 @@ package be.vinci.ipl.projet.passengers.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 public class PassengerTrips {
 
   private List<Trip> pending = new ArrayList<>();
@@ -12,15 +18,15 @@ public class PassengerTrips {
   public PassengerTrips() {
   }
 
-  public void addUserPending(Trip trip) {
+  public void addTripPending(Trip trip) {
     pending.add(trip);
   }
 
-  public void addUserAccepted(Trip trip) {
+  public void addTripAccepted(Trip trip) {
     accepted.add(trip);
   }
 
-  public void addUserRefused(Trip trip) {
+  public void addTripRefused(Trip trip) {
     refused.add(trip);
   }
 

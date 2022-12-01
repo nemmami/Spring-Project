@@ -37,5 +37,5 @@ DELETE http://localhost:9002/passengers/trips/1
 ### Delete all passengers from user 2
 DELETE http://localhost:9002/passengers/users/2
 
-### Read all passengers from trip 1 in lists
-GET http://localhost:9002//passengers/users/2/passenger
+### Get trips where user is a passenger with a future departure date by status
+GET http://localhost:9002/passengers/users/1/passenger

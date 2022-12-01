@@ -1,5 +1,6 @@
 package be.vinci.ipl.projet.passengers.models;
 
+import java.time.LocalDate;
 import lombok.*;
 
 @Getter
@@ -10,9 +11,9 @@ public class Trip {
   private int id;
   private Position origin;
   private Position destination;
-  private String departure;
-  private int dirverId;
-  private int availableSeating;
+  private LocalDate departureDate;
+  private int driverId;
+  private int availableSeatigng;
 
 }
 
