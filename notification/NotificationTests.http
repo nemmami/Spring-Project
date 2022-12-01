@@ -1,0 +1,29 @@
+###Create one notification
+POST http://localhost:9005/notifications/users/1
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "tripId": 1,
+  "date": "2022-12-12",
+  "notificationText": "le trajet est accepte"
+
+}
+
+###Create one notification
+POST http://localhost:9005/notifications/users/1
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "tripId": 3,
+  "date": "2023-12-12",
+  "notificationText": "le trajet est refuse"
+
+}
+
+### READ ALL Notification
+GET http://localhost:9005/notifications/users/1
+
+### Delete ALL Notification
+DELETE http://localhost:9005/notifications/users/1

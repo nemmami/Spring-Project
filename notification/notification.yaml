@@ -1,0 +1,90 @@
+openapi: 3.0.3
+info:
+  title: Groupe 12 authentification service
+  description: Microservice handling authentification
+  version: 1.0.0
+servers:
+  - url: http://localhost:9002
+    description: Development server
+paths:
+  /notifications/users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 1
+        description: ID of the user
+    get:
+      summary: Get user notifications
+      security:
+        - authentication:
+            - specific_user
+      responses:
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: No user found with this ID
+        200:
+          description: Sent user notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/notification'
+    post:
+      summary: Add user notifications
+      security:
+        - authentication:
+            - specific_user
+      responses:
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: No user found with this ID
+        200:
+          description: Add user notifications
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/notification'
+    delete:
+      summary: Delete all notifications of this user
+      security:
+        - authentication:
+            - specific_user
+      responses:
+        401:
+          description: Missing authentication
+        403:
+          description: Not identified as the corresponding user
+        404:
+          description: No user found with this ID
+        200:
+          description: All notifications are deleted
+
+components:
+  schemas:
+    notification:
+      type: object
+      properties:
+        user_id:
+          type: integer
+        trip_id:
+          type: integer
+        date:
+          type: string
+          description: Date in ISO 8601, YYYY-MM-DD
+        notification_text:
+          type: string
+      example:
+        user_id: 12
+        trip_id: 38
+        date: 2022-10-24
+        notification_text: Votre demande de voyage a été acceptée

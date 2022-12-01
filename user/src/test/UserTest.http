@@ -1,0 +1,25 @@
+### Create user
+POST http://localhost:9007/users/
+Content-Type: application/json
+
+{
+  "email": "nicola.mylonas@gmail.com",
+  "firstname": "Nico",
+  "lastname": "Mylonas"
+}
+
+### Read user
+GET http://localhost:9007/users/1
+
+### Update user
+PUT http://localhost:9007/users/1
+Content-Type: application/json
+
+{
+  "pseudo": "nicola.mylonas@gmail.com",
+  "firstname": "Nicola",
+  "lastname": "Mylonas"
+}
+
+### Delete user
+DELETE http://localhost:9007/users/1
