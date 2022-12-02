@@ -11,9 +11,9 @@ Content-Type: application/json
     "latitude": 1.5678,
     "longitude": 1234.5678
   },
-  "departureDate": "2022-12-10",
-  "driverId": 2,
-  "availableSeatigng": 4
+  "departureDate": "2022-12-11",
+  "driverId": 1,
+  "availableSeating": 4
 }
 
 ###Read one trip
@@ -21,7 +21,7 @@ GET http://localhost:9003/trips/1
 Content-Type: application/json
 
 ###Read the trips of a driver
-GET http://localhost:9003/trips/driver/1
+GET http://localhost:9003/trips/driver/2
 Content-Type: application/json
 
 ###Delete one trip
@@ -37,9 +37,17 @@ GET http://localhost:9003/trips
 Content-Type: application/json
 
 ###Get 20 firsts trips with date filter
-GET http://localhost:9003/trips?date=2022-12-10
+GET http://localhost:9003/trips?departureDate=2022-12-11
 Content-Type: application/json
 
-###CalculatedDistance
-GET http://localhost:9003/calculatedDistance/2
+###Get 20 firsts trips with origin filter
+GET http://localhost:9003/trips?originLat=1234.5678&originLon=12.678
+Content-Type: application/json
+
+###Get 20 firsts trips with dest filter
+GET http://localhost:9003/trips?destinationLat=1234.5678&destinationLon=12.678
+Content-Type: application/json
+
+###Get 20 firsts trips with origin and dest filter
+GET http://localhost:9003/trips?destinationLat=1234.5678&destinationLon=12.678&originLat=1234.5678&originLon=12.678
 Content-Type: application/json

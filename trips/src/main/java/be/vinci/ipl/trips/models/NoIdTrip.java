@@ -14,8 +14,8 @@ public class NoIdTrip {
     private Position destination;
     private LocalDate departureDate;
     private int driverId;
-    private int availableSeatigng;
+    private int availableSeating;
     public Trip toTrip() {
-        return new Trip(0, origin, destination, departureDate, driverId, availableSeatigng);
+        return new Trip(0, origin, destination, departureDate, driverId, availableSeating);
     }
 }
