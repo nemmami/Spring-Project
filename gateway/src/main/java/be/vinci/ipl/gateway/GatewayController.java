@@ -10,6 +10,8 @@ import be.vinci.ipl.gateway.models.Passengers;
 import be.vinci.ipl.gateway.models.Trip;
 import be.vinci.ipl.gateway.models.User;
 import jakarta.ws.rs.QueryParam;
+import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -137,10 +139,12 @@ public class GatewayController {
 
 
   @GetMapping("/trips")
-  Iterable<Trip> getListTrips(@QueryParam("departure_date") String departureDate,
-      @QueryParam("originLon") String originLon, @QueryParam("originLat") String originLat, @QueryParam("destinationLat") String destinationLon ,
-      @QueryParam("destinationLon") String  destinationLat) {
-    return service.getListTrips(departureDate,originLon,originLat,destinationLon,destinationLat);
+  Iterable<Trip> getListTrips(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate,
+      @RequestParam(required = false) Double origineLat,
+      @RequestParam(required = false) Double origineLon,
+      @RequestParam(required = false) Double destinationLat,
+      @RequestParam(required = false) Double destinationLon) {
+    return service.getListTrips(departureDate,origineLat,origineLon,destinationLon,destinationLat);
   }
 
 
