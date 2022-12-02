@@ -4,6 +4,7 @@ package be.vinci.ipl.gateway;
 
 import be.vinci.ipl.gateway.data.*;
 import be.vinci.ipl.gateway.models.*;
+import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -181,7 +182,7 @@ public class GatewayService {
    *
    * @return list of trips
    */
-  public Iterable<Trip> getListTrips(String dateDeparture,String originLat, String originLon, String destinationLat,  String destinationLon  ){
+  public Iterable<Trip> getListTrips(LocalDate dateDeparture,double originLat, double originLon, double destinationLat,  double destinationLon  ){
     return tripsProxy.getListTrips(dateDeparture,originLat,originLon,destinationLat,destinationLon);
   }
 
