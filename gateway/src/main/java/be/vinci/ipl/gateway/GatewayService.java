@@ -1,4 +1,4 @@
-package be.vinci.ipl.gateway2;
+package be.vinci.ipl.gateway;
 
 
 
@@ -15,8 +15,12 @@ public class GatewayService {
   private final PassengersProxy passengersProxy;
   private final NotificationsProxy notificationsProxy;
 
-  public GatewayService(AuthenticationProxy authenticationProxy,
-      TripsProxy tripsProxy, UsersProxy usersProxy, PassengersProxy passengersProxy, NotificationsProxy notificationsProxy) {
+  public GatewayService(
+      AuthenticationProxy authenticationProxy,
+      TripsProxy tripsProxy,
+      UsersProxy usersProxy,
+      PassengersProxy passengersProxy,
+      NotificationsProxy notificationsProxy) {
     this.authenticationProxy = authenticationProxy;
     this.tripsProxy = tripsProxy;
     this.usersProxy = usersProxy;

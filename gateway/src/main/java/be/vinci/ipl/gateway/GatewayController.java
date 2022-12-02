@@ -1,4 +1,4 @@
-package be.vinci.ipl.gateway2;
+package be.vinci.ipl.gateway;
 
 
 import be.vinci.ipl.gateway.models.Credentials;
@@ -9,7 +9,7 @@ import be.vinci.ipl.gateway.models.PassengerTrips;
 import be.vinci.ipl.gateway.models.Passengers;
 import be.vinci.ipl.gateway.models.Trip;
 import be.vinci.ipl.gateway.models.User;
-import javax.ws.rs.QueryParam;
+import jakarta.ws.rs.QueryParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

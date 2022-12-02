@@ -1,4 +1,4 @@
-package be.vinci.ipl.gateway2.models;
+package be.vinci.ipl.gateway.models;
 
 
 import lombok.*;

@@ -1,4 +1,4 @@
-package be.vinci.ipl.gateway2.config;
+package be.vinci.ipl.gateway.config;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;

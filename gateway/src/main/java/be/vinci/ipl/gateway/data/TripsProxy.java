@@ -1,7 +1,7 @@
-package be.vinci.ipl.gateway2.data;
+package be.vinci.ipl.gateway.data;
 
 import be.vinci.ipl.gateway.models.*;
-import javax.ws.rs.QueryParam;
+import jakarta.ws.rs.QueryParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.DeleteMapping;
