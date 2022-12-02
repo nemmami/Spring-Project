@@ -1,3 +1,18 @@
-###CalculatedDistance
-GET http://localhost:9001/calculatedDistance/2
+###get CalculatedDistance from a existing trip
+GET http://localhost:9001/calculatedDistance/1
 Content-Type: application/json
+
+###get CalculatedDistance from specified points
+GET http://localhost:9001/calculatedDistance/
+Content-Type: application/json
+
+{
+  "origin": {
+    "latitude": 1234.5678,
+    "longitude": 1234.5678
+  },
+  "destination": {
+    "latitude": 1.5678,
+    "longitude": 1234.5678
+  }
+}

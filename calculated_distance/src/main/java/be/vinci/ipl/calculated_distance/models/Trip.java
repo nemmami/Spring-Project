@@ -32,5 +32,5 @@ public class Trip {
 
     private LocalDate departureDate;
     private int driverId;
-    private int availableSeatigng;
+    private int availableSeating;
 }

@@ -8,10 +8,8 @@ import static java.lang.Math.abs;
 
 @Service
 public class CalculatedDistanceService {
-    private final TripsProxy tripsProxy;
-
-    public CalculatedDistanceService(TripsProxy tripsProxy) {
-        this.tripsProxy = tripsProxy;
+    public CalculatedDistanceService() {
+        ;
     }
 
     public double getDistance(double origin_lat, double origin_long, double dest_lat, double dest_long) {
