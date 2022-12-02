@@ -14,7 +14,7 @@ public class Trip {
   private Position destination;
   private LocalDate departureDate;
   private int driverId;
-  private int availableSeatigng;
+  private int availableSeating;
 
 }
 
