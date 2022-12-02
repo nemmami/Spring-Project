@@ -1,4 +1,4 @@
-package be.vinci.ipl.gateway.config;
+package be.vinci.ipl.gateway2.config;
 
 import feign.codec.ErrorDecoder;
 import org.springframework.context.annotation.Bean;

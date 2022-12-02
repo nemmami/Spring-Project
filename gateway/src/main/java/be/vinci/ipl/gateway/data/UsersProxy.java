@@ -1,4 +1,4 @@
-package be.vinci.ipl.gateway.data;
+package be.vinci.ipl.gateway2.data;
 
 import be.vinci.ipl.gateway.models.*;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -1,4 +1,4 @@
-package be.vinci.ipl.gateway;
+package be.vinci.ipl.gateway2;
 
 
 
