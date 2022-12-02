@@ -1,0 +1,15 @@
+package be.vinci.ipl.projet.mock_passengers;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+public class Position {
+  private double latitude;
+  private double longitude;
+}

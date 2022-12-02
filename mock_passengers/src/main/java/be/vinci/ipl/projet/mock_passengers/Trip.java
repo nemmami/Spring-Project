@@ -1,14 +1,16 @@
-package be.vinci.ipl.projet.passengers.models;
+package be.vinci.ipl.projet.mock_passengers;
 
 import java.time.LocalDate;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@AllArgsConstructor
 public class Trip {
-
   private int id;
   private Position origin;
   private Position destination;
@@ -17,4 +19,3 @@ public class Trip {
   private int availableSeating;
 
 }
-
