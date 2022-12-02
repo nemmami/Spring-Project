@@ -11,9 +11,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-@Entity(name = "users")
 public class User {
-  @Id
+
   private int id;
   private String email;
   private String firstname;
