@@ -77,8 +77,8 @@ public class TripsService {
         //return repository.findAll();
         Iterable<Trip> firsts = repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         return StreamSupport.stream(firsts.spliterator(), false)
-                .filter(first ->
-                    first.getAvailableSeatigng() > 0
+                .filter(e ->
+                    e.getAvailableSeatigng() > 0
                 )
                 .limit(20)
                 .toList();

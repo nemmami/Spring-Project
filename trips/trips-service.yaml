@@ -12,9 +12,6 @@ paths:
   /trips:
     post:
       summary: Create a trip
-      security:
-        - authentication:
-            - any_user
       requestBody:
         description: Information of the trip
         content:
@@ -24,10 +21,6 @@ paths:
       responses:
         400:
           description: Trip in request is not correct
-        401:
-          description: Missing authentication
-        403:
-          description: Not identified as the corresponding user
         201:
           description: Trip is created, sent trip created with its assigned ID
           content:
@@ -113,14 +106,7 @@ paths:
                 $ref: '#/components/schemas/trip'
     delete:
       summary: Delete trip
-      security:
-        - authentication:
-            - driver
       responses:
-        401:
-          description: Missing authentication
-        403:
-          description: Not identified as the corresponding user
         404:
           description: No trip found with this ID
         201:
@@ -152,14 +138,7 @@ paths:
     
     delete:
       summary: Delete all the trips where the user is a driver
-      security:
-        - authentication:
-            - driver
       responses:
-        401:
-          description: Missing authentication
-        403:
-          description: Not identified as the corresponding user
         404:
           description: No trip found with this driver ID
         201:
