@@ -29,20 +29,21 @@ paths:
             'application/json':
               schema:
                 $ref: '#/components/schemas/calculatedDistance'
-    post:
-      summary: Create the calculated distance
-      security:
-        - authentication:
-            - driver
+
+  /calculatedDistance/:
+    get:
+      summary: Get the calculated distance
+      requestBody:
+        description: Information of the trip
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/positionHolder'
       responses:
-        401:
-          description: Missing authentication
-        403:
-          description: Not identified as the corresponding user
-        404:
-          description: No trip found with this ID
-        201:
-          description: Calculated distance is created, sent the calculated distance created with its assigned ID
+        400:
+          description: Bad request
+        200:
+          description: Sent trip information
           content:
             'application/json':
               schema:
@@ -56,6 +57,33 @@ components:
       bearerFormat: JWT
 
   schemas:
+    position:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+      example:
+        latitude: 50.849372
+        longitude: 4.451009
+
+    positionHolder:
+      type: object
+      properties:
+        origin:
+          $ref: '#/components/schemas/position'
+        destination:
+          $ref: '#/components/schemas/position'
+      example:
+        origin:
+          latitude: 50.849372
+          longitude: 4.451009
+        destination:
+          latitude: 50.849372
+          longitude: 4.451009
+
+
     calculatedDistance:
       type: object
       properties:
@@ -63,8 +91,14 @@ components:
           type: integer
         distance:
           type: number
-        
       example:
         idTrip: 12
         distance: 52.10
 
+    distance:
+      type: object
+      properties:
+        distance:
+          type: number
+      example:
+        distance: 52.10

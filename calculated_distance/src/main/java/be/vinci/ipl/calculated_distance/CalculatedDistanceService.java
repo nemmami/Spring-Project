@@ -14,11 +14,8 @@ public class CalculatedDistanceService {
         this.tripsProxy = tripsProxy;
     }
 
-    public double getDistance(int id) {
-        Trip trip = tripsProxy.readOne(id);
-        if(trip == null)
-            return -1;
-        return (abs(trip.getOrigin().getLatitude() - trip.getOrigin().getLongitude())
-                + abs(trip.getDestination().getLatitude() - trip.getDestination().getLongitude()));
+    public double getDistance(double origin_lat, double origin_long, double dest_lat, double dest_long) {
+        return (abs(origin_lat - origin_long)
+                + abs(dest_lat - dest_long));
     }
 }

@@ -11,7 +11,7 @@ Content-Type: application/json
     "latitude": 1.5678,
     "longitude": 1234.5678
   },
-  "departureDate": "2022-12-12",
+  "departureDate": "2022-12-10",
   "driverId": 2,
   "availableSeatigng": 4
 }
@@ -34,6 +34,10 @@ Content-Type: application/json
 
 ###Get 20 firsts trips
 GET http://localhost:9003/trips
+Content-Type: application/json
+
+###Get 20 firsts trips with date filter
+GET http://localhost:9003/trips?date=2022-12-10
 Content-Type: application/json
 
 ###CalculatedDistance
